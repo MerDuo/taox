@@ -1,6 +1,6 @@
-# taoxxxxxx
+# taox
 
-哈哈哈
+第一次跑请先npm install
 ## Project setup
 ```
 npm install
