@@ -1,6 +1,6 @@
 # taox
 
-第一次跑请先npm install(●'◡'●)hhhhhhhh
+第一次跑请先npm install(●'◡'●)hhhh
 ## Project setup
 ```
 npm install
