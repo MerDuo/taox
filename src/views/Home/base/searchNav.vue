@@ -1,0 +1,51 @@
+<template>
+  <div class="navbar">
+    <van-row type="flex" justify="space-between" align="center" span="40">
+      <van-col span="2" class="text-right">
+        <van-icon  color="#fff" class-prefix="icon-font-20 iconfont icon-leimupinleifenleileibie2"></van-icon>
+      </van-col>
+        <!-- 搜索框 -->
+      <van-col span="20">
+          <van-search @focus="goSearch" input-align="left" shape="round" background="#FF8400" placeholder="请输入搜索关键词a" v-model="searchValue" style="width:90%;"/>
+      </van-col>
+      <!-- 信息 -->
+      <van-col span="2">
+          <van-icon @click="goNews" name="bell" class-prefix="icon-font-20 iconfont icon-bell " color="#fff"></van-icon>
+      </van-col>
+    </van-row>
+  </div>
+</template>
+<script>
+export default {
+  components: {
+  },
+  data () {
+    return {
+      searchValue: ''
+    }
+  },
+  methods: {
+    goSearch () {
+      this.$router.push('/search')
+    },
+    goNews () {
+      // this.$router.push("/news")
+      this.$toast('功能未开发')
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.navbar {
+  .van-row{
+      width: 100%;
+      background: linear-gradient(to bottom, #FF8400 0%, #FF8400 100%);
+      .van-cell{
+        line-height: 19px;
+      }
+  }
+  .text-right{
+    text-align: right;
+  }
+}
+</style>
