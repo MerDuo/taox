@@ -2,12 +2,23 @@
   <div class="home">
     <!-- 顶部导航 -->
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-      <p>这是首页</p>
       <!-- 搜索 -->
       <search-nav></search-nav>
-      <!-- 跑马灯 -->
-      <Swipe></Swipe>
-      <IconNav></IconNav>
+      <!-- 轮播图 -->
+      <swipe></swipe>
+      <!-- 图标列表 -->
+      <icon-nav></icon-nav>
+      <!-- 一个广告 -->
+      <img src="../../assets/u=372752334,3809558051&fm=26&gp=0.jpg" style="height:80%;width:100%;">
+      <!-- 限时抢购 -->
+      <spike></spike>
+      <!-- 猜你喜欢 -->
+      <like-goods>
+        <div slot="like" class="like">
+          <br>
+          <span>为你推荐</span>
+        </div>
+      </like-goods>
     </van-pull-refresh>
     <menuBar></menuBar>
   </div>
@@ -18,13 +29,17 @@
   import Swipe from './base/swipe.vue'
   import menuBar from '../../components/MenuBar.vue'
   import searchNav from './base/searchNav'
+  import spike from './base/spike.vue'
+  import likeGoods from '../../components/likeGoods.vue'
   export default {
     name: 'home',
     components: {
       searchNav,
       menuBar,
       Swipe,
-      IconNav
+      IconNav,
+      spike,
+      likeGoods
     },
     data() {
       return {
@@ -45,15 +60,14 @@
 <style lang='scss' scoped>
   .home {
     padding-bottom: 50px;
-
-    .swiper-wrapper-w {
-      width: 95%;
-      margin: auto;
-      height: 140px;
-      margin-bottom: 5px;
-      margin-top: 10px;
-      border-radius: 5px;
-      overflow: hidden;
+    .like{
+      background-color: #f4f4f4;
+      span {
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 8px;
+        margin-top: 10px;
+      }
     }
   }
 </style>

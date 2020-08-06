@@ -1,123 +1,95 @@
 <template>
   <div class="icons-nav">
-    <van-swipe :loop="false" @change=change>
-      <van-swipe-item @click="onClick" v-for="(icons,index) in iconData" :key="index">
-        <van-grid :border="false" :column-num="5">
-          <van-grid-item v-for="(item,index) in icons" :key="index">
-            <van-image class="iconimg" :src="item.iconUrl" />
-            <span class="name">{{item.name}}</span>
-          </van-grid-item>
-        </van-grid>
-      </van-swipe-item>
-      <!-- 自定义提示器 -->
-      <div slot="indicator" class="indicator">
-        <div :class="{'active':indicatorActive == 0}"></div>
-        <div :class="{'active':indicatorActive == 1}"></div>
-      </div>
-    </van-swipe>
+    <van-grid :border="false" :column-num="5">
+      <van-grid-item v-for="(item,index) in icons" :key="index" @click="onClick">
+        <van-image class="iconimg" :src="item.iconUrl"/>
+        <span class="name">{{item.name}}</span>
+      </van-grid-item>
+    </van-grid>
   </div>
 </template>
 <script>
-  import {
-    Grid,
-    GridItem,
-    Image,
-    Swipe,
-    SwipeItem
-  } from "vant"
-  export default {
-    components: {
-      [Grid.name]: Grid,
-      [GridItem.name]: GridItem,
-      [Image.name]: Image,
-      [Swipe.name]: Swipe,
-      [SwipeItem.name]: SwipeItem
-    },
-    data() {
-      return {
-        icons: [],
-        indicatorActive: 0
-      }
-    },
-    created() {
-      // 请求Icons nav 数据
-      this.getIconsData()
-    },
-    methods: {
-      getIconsData() {
-        this.$api.homeData.iconsNav().then(({
-          data: {
-            iconnav
-          }
-        }) => {
-          this.icons = iconnav
-          console.log(iconnav)
-        })
-      },
-      change(index) {
-        this.indicatorActive = index
-      },
-      onClick() {
-        this.$toast('功能未开发')
-      }
-    },
-    computed: {
-      // 二维数组计算
-      iconData() {
-        const iconData = []
-        this.icons.forEach((item, index) => {
-          const iconItem = Math.floor(index / 10)
-          if (!iconData[iconItem]) {
-            iconData[iconItem] = []
-          }
-          iconData[iconItem].push(item)
-        })
-        return iconData
-      }
+export default {
+  data () {
+    return {
+      icons: [
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        },
+        {
+          name: '精品男装',
+          iconUrl: 'http://t07img.yangkeduo.com/images/2018-05-16/26c916947489c6b2ddd188ecdb54fd8d.png?imageMogr2/format/webp/quality/50'
+        }
+      ]
+    }
+  },
+  created () {
+    // 请求Icons nav 数据
+    // this.getIconsData()
+  },
+  methods: {
+    // getIconsData () {
+    //   this.$api.homeData.iconsNav().then(({ data: { iconnav } }) => {
+    //     this.icons = iconnav
+    //     console.log(iconnav)
+    //   })
+    // },
+    onClick () {
+      this.$toast("功能未开发")
     }
   }
+}
 </script>
 <style lang="scss">
-  .icons-nav {
-    position: relative;
-
-    .indicator {
-      position: absolute;
-      bottom: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      border-radius: 2px;
-      overflow: hidden;
-
-      div {
-        height: 5px;
-        width: 30px;
-        background-color: #ccc;
-      }
-
-      .active {
-        background-color: #f60;
-      }
+.icons-nav {
+  position: relative;
+  .van-grid {
+      border-radius: 10px;
+  }
+  .van-grid-item__content {
+    padding: 5px;
+    .iconimg {
+      width: 26px;
+      height: 26px;
+      margin-bottom: 5px;
     }
 
-    .van-swipe {
-      padding-bottom: 10px;
-      background-color: #fff;
-    }
-
-    .van-grid-item__content {
-      padding: 5px;
-
-      .iconimg {
-        width: 36px;
-        height: 36px;
-        margin-bottom: 5px;
-      }
-
-      span.name {
-        font-size: 11px;
-      }
+    span.name {
+      font-size: 11px;
     }
   }
+}
 </style>

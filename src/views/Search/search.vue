@@ -1,14 +1,14 @@
 <template>
   <div class="search">
     <!-- 顶部导航 -->
-    <van-nav-bar title="标题" left-text="返回" left-arrow @click-left="black">
+    <van-nav-bar title="标题" left-text="返回" left-arrow @click-left="back">
       <template #title>
         <form>
-          <van-search v-model="keywords" placeholder="请输入搜索关键词" shape="round" @search="onSearch"/>
+          <van-search v-model="keywords" placeholder="请输入搜索关键词" shape="round" @search="clickSearch"/>
         </form>
       </template>
       <template #right>
-        <van-button round type="info" color="#FF5000" style="height:80%;">搜索</van-button>
+        <van-button round type="info" color="#FF8400" style="height:80%;" @click="clickSearch">搜索</van-button>
       </template>
     </van-nav-bar>
     <!-- 搜索历史 -->
@@ -18,16 +18,19 @@
           slot="right-icon"
           color="#ccc"
           @click="clear"
-          class-prefix="icon-font-18 iconfont icon-laji"
           style="line-height: inherit;"
+          name="delete"
+          size="1.2rem"
         />
       </van-cell>
       <!--搜索历史内容 -->
-      <div class="history-content" v-if="!clearHistory"></div>
+      <ul class="history-content" v-for="(item, index) in historyList" :key="index">
+        <li>{{item}}</li>
+      </ul>
     </div>
-    <!-- 热门搜索 -->
+    <!-- 全网热搜 -->
     <div class="hot-search">
-      <van-cell title="搜索发现" size="large">
+      <van-cell title="全网热搜" size="large">
         <van-icon
           size="20px"
           slot="right-icon"
@@ -36,41 +39,56 @@
           style="line-height: inherit;"
         />
       </van-cell>
-      <!-- 热门搜索内容 -->
-      <div class="hot-search-content"></div>
+      <!-- 全网热搜内容 -->
+      <ul class="hot-search-content" v-for="(item, index) in hotList" :key="index">
+        <li @click="goHot(index)">{{item.title}}</li>
+      </ul>
+      <br><br>
     </div>
-    <!-- 猜你喜欢 -->
+    <!-- 为你推荐 -->
+    <br>
+    <like-goods></like-goods>
   </div>
 </template>
 
 <script>
+import likeGoods from '../../components/likeGoods.vue'
+import { Toast } from 'vant'
 export default {
-  components: {},
+  components: {
+    likeGoods
+  },
   data () {
     return {
       keywords: '',
-      clearHistory: false
+      historyList: [],
+      hotList: [
+        {
+          title: '好吃的五花肉',
+          url: ''
+        },
+        {
+          title: '好吃的丸圆',
+          url: ''
+        }
+      ]
     }
   },
   methods: {
-    black () {
+    back () {
       this.$router.go(-1)
     },
-    onSearch () {
-      console.log('我已经执行了')
+    clickSearch () {
+      Toast('搜索未研发')
+      this.historyList.push(this.keywords)
+      this.keywords = ''
     },
     // 清除历史搜索
     clear () {
-      this.$dialog
-        .confirm({
-          message: '你确定要删除该商品订单吗？'
-        })
-        .then(() => {
-          this.clearHistory = true
-        })
-        .catch(() => {
-          // on cancel
-        })
+      this.historyList.splice(0,this.historyList.length)
+    },
+    goHot (i) {
+      this.$router.push(this.hotList[i].url)
     }
   }
 }
@@ -86,13 +104,15 @@ export default {
   .hot-search {
     .history-content,
     .hot-search-content {
-      padding: 3px 10px;
-      div {
+      li {
         background-color: #eeeeee;
-        padding: 3px 10px;
-        margin: 0 10px;
-        display: inline-block;
-        border-radius: 20px;
+        padding: 7px;
+        margin-top: 10px;
+        margin-left: 10px;
+        height: 120%;
+        display: block;
+        float: left;
+        border-radius: 12px;
         margin-bottom: 10px;
         color: #333;
       }

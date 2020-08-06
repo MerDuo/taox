@@ -11,6 +11,8 @@ const Home = () => import('../views/Home/Home.vue')
 const Search = () => import('../views/Search/search.vue')
 // 购物车
 const Cart = () => import('../views/Cart/cart.vue')
+// 商品详情
+const Detail = () => import('../views/Detail/detail.vue')
 
 const routes = [{
     path: '/',
@@ -27,6 +29,11 @@ const routes = [{
   {
     path: '/cart',
     component: Cart
+  },
+  {
+    name: 'detail',
+    path: '/detail/:goodid',
+    component: Detail
   }
   // {
   //   path: '/about',

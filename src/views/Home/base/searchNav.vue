@@ -1,21 +1,19 @@
 <template>
   <div class="navbar">
     <van-row type="flex" justify="space-between" align="center" span="40">
-      <van-col span="2" class="text-right">
-        <van-icon  color="#fff" class-prefix="icon-font-20 iconfont icon-leimupinleifenleileibie2"></van-icon>
-      </van-col>
-        <!-- 搜索框 -->
-      <van-col span="20">
-          <van-search @focus="goSearch" input-align="left" shape="round" background="#FF8400" placeholder="请输入搜索关键词a" v-model="searchValue" style="width:90%;"/>
-      </van-col>
+      <!-- 搜索框 -->
+      <!-- <van-col span="40"> -->
+          <van-search @focus="goSearch" input-align="center" shape="round" background="#FF8400" placeholder="请输入搜索关键词" v-model="searchValue" style="width:90%;"/>
+      <!-- </van-col> -->
       <!-- 信息 -->
-      <van-col span="2">
-          <van-icon @click="goNews" name="bell" class-prefix="icon-font-20 iconfont icon-bell " color="#fff"></van-icon>
-      </van-col>
+      <!-- <van-col span="2">
+          <van-icon @click="goNews" name="bell" color="#fff" size="1.3rem"></van-icon>
+      </van-col> -->
     </van-row>
   </div>
 </template>
 <script>
+
 export default {
   components: {
   },
@@ -42,6 +40,12 @@ export default {
       background: linear-gradient(to bottom, #FF8400 0%, #FF8400 100%);
       .van-cell{
         line-height: 19px;
+      }
+      .van-search {
+        margin: 0 auto;
+      }
+      .van-icon {
+        margin-left: -10px;
       }
   }
   .text-right{
