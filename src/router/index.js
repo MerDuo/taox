@@ -9,15 +9,24 @@ Vue.use(VueRouter)
 const Home = () => import('../views/Home/Home.vue')
 // 搜索
 const Search = () => import('../views/Search/search.vue')
+// 购物车
+const Cart = () => import('../views/Cart/cart.vue')
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     component: Home
   },
   {
     path: '/search',
     component: Search
+  },
+  {
+    path: '/home',
+    component: Home
+  },
+  {
+    path: '/cart',
+    component: Cart
   }
   // {
   //   path: '/about',

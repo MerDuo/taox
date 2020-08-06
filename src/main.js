@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import api from "./api/index"
+
 import {
   Toast,
   Icon,
@@ -12,7 +14,12 @@ import {
   Cell,
   CellGroup,
   NavBar,
-  Button
+  Button,
+  Tabbar,
+  TabbarItem,
+  Swipe,
+  SwipeItem,
+  Lazyload
 } from 'vant'
 
 Vue.use(Toast)
@@ -25,7 +32,13 @@ Vue.use(Toast)
   .use(CellGroup)
   .use(NavBar)
   .use(Button)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Swipe)
+  .use(SwipeItem)
+  .use(Lazyload)
 Vue.config.productionTip = false
+Vue.prototype.$api = api
 
 new Vue({
   router,
