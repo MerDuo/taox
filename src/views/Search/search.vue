@@ -43,7 +43,7 @@
       <ul class="hot-search-content" v-for="(item, index) in hotList" :key="index">
         <li @click="goHot(index)">{{item.title}}</li>
       </ul>
-      <br><br>
+      <br><br> <br><br><br>
     </div>
     <!-- 为你推荐 -->
     <br>
@@ -64,12 +64,28 @@ export default {
       historyList: [],
       hotList: [
         {
+          id: 1,
           title: '好吃的五花肉',
-          url: ''
+          url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
+          nowPrice: 110,
+          formerPrice: 118,
+          total_sales: 100
         },
         {
+          id: 2,
+          title: '好吃的花生酱',
+          url: 'https://ddimg.ddxq.mobi/abf3023fb51611526109391551.jpg!maicai.product.list',
+          nowPrice: 110,
+          formerPrice: 118,
+          total_sales: 100
+        },
+        {
+          id: 3,
           title: '好吃的丸圆',
-          url: ''
+          url: require('../../assets/QQ图片20200326191252.jpg'),
+          nowPrice: 110,
+          formerPrice: 118,
+          total_sales: 100
         }
       ]
     }
@@ -87,8 +103,15 @@ export default {
     clear () {
       this.historyList.splice(0,this.historyList.length)
     },
-    goHot (i) {
-      this.$router.push(this.hotList[i].url)
+    goHot (index) {
+      this.$router.push({
+         name: 'detail',
+          params: {
+          goodid: index,
+          goodsInfo: this.hotList[index],
+          isFlash: true
+        }
+      })
     }
   }
 }
@@ -97,6 +120,9 @@ export default {
 <style lang='scss' scoped>
 .search {
   background-color: #fff;
+  .van-button--normal {
+    padding: 0 10px;
+  }
   .van-search__content {
     background-color: #eeeeee;
   }

@@ -19,7 +19,7 @@
     </van-row>
     <!-- 秒杀商品 -->
     <van-row class="spike-goods" type="flex" justify="space-between">
-      <van-col class="spike-goods-item" @click="goDetail" v-for="(item, index) in spikeGoods" :key="index">
+      <van-col class="spike-goods-item" @click="goDetail(index)" v-for="(item, index) in spikeGoods" :key="index">
         <van-image
           fit="contain"
           lazy-load
@@ -43,29 +43,44 @@ export default {
       time: 2 * 60 * 60 * 1000,
       spikeGoods: [
         {
+          id: 1,
           title: '精品五花肉',
           url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
           nowPrice: 110,
-          formerPrice: 118
+          formerPrice: 118,
+          total_sales: 100
         },
         {
+          id: 2,
           title: '宝宝花生酱',
           url: 'https://ddimg.ddxq.mobi/abf3023fb51611526109391551.jpg!maicai.product.list',
           nowPrice: 110,
-          formerPrice: 118
+          formerPrice: 118,
+          total_sales: 100
         },
         {
+          id: 3,
           title: '丸圆',
           url: require('../../../assets/QQ图片20200326191252.jpg'),
           nowPrice: 110,
-          formerPrice: 118
+          formerPrice: 118,
+          total_sales: 100
         }
       ]
     }
   },
   methods: {
-    goDetail () {
-       this.$router.push('/detail?goods_id=52157500821')
+    goDetail (index) {
+      // console.log(index)
+      // console.log(this.spikeGoods[index])
+       this.$router.push({
+         name: 'detail',
+          params: {
+          goodid: index,
+          goodsInfo: this.spikeGoods[index],
+          isFlash: true
+        }
+       })
     },
     moreClick () {
       Toast('没有更多了')

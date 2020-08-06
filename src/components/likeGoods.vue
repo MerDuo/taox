@@ -51,74 +51,94 @@ export default {
       finished: false,
       goodsData: [
         {
+          id: 1,
           url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
           goods_name: '五花肉',
           description: '好吃的五花肉',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 2,
           url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
           goods_name: '五花肉',
           description: '好吃的五花肉',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 3,
           url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
           goods_name: '五花肉',
           description: '好吃的五花肉',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 4,
           url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
           goods_name: '五花肉',
           description: '好吃的五花肉',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 5,
           url: require('../assets/QQ图片20200326191252.jpg'),
           goods_name: '丸圆',
           description: '好吃的丸圆',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 6,
           url: require('../assets/QQ图片20200326191252.jpg'),
           goods_name: '丸圆',
           description: '好吃的丸圆',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 7,
           url: require('../assets/QQ图片20200326191252.jpg'),
           goods_name: '丸圆',
           description: '好吃的丸圆',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 8,
           url: require('../assets/QQ图片20200326191252.jpg'),
           goods_name: '丸圆',
           description: '好吃的丸圆',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 9,
           url: require('../assets/QQ图片20200326191252.jpg'),
           goods_name: '丸圆',
           description: '好吃的丸圆',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         },
         {
+          id: 10,
           url: require('../assets/QQ图片20200326191252.jpg'),
           goods_name: '丸圆',
           description: '好吃的丸圆',
           nowPrice: 100,
-          formerPrice: 120
+          formerPrice: 120,
+          total_sales: 100
         }
       ]
     }
@@ -136,21 +156,16 @@ export default {
     },
     // 跳转到商品详细页
     goDetail(index) {
-      // const goods_id = this.goodsData[index].goods_id
-      // this.$toast.loading({
-      //   message: "加载中...",
-      //   forbidClick: true,
-      //   loadingType: "spinner"
-      // })
-      // setTimeout(() => {
-      //   this.$toast.clear()
-      //   this.$router.push({
-      //   name: "detail",
-      //   query: {
-      //     goods_id: goods_id
-      //   }
-      // })
-      // },500)
+      // console.log(index)
+      // console.log(this.goodsData[index])
+      this.$router.push({
+        name: 'detail',
+        params: {
+          goodid: index,
+          goodsInfo: this.goodsData[index],
+          isFlash: false
+        }
+      })
     }
   }
 }

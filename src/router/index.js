@@ -13,8 +13,12 @@ const Search = () => import('../views/Search/search.vue')
 const Cart = () => import('../views/Cart/cart.vue')
 // 商品详情
 const Detail = () => import('../views/Detail/detail.vue')
-
-const routes = [{
+// 登录注册
+const Login = () => import('../views/Login/login.vue')
+// 分类
+const Category = () => import('../views/Category/category.vue')
+const routes = [
+  {
     path: '/',
     component: Home
   },
@@ -34,15 +38,15 @@ const routes = [{
     name: 'detail',
     path: '/detail/:goodid',
     component: Detail
+  },
+  {
+    path: '/login',
+    component: Login
+  },
+  {
+    path: '/category',
+    component: Category
   }
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
 ]
 
 const router = new VueRouter({

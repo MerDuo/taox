@@ -1,108 +1,97 @@
 <template>
   <div id="goodsDetail">
-    <van-nav-bar :title="商品详情"
-                 :fixed=true
-                 left-arrow
-                 @click-left="onClickLeft">
-    </van-nav-bar>
+    <van-nav-bar title="商品详情" :fixed="true" left-arrow @click-left="onClickLeft"></van-nav-bar>
     <div class="goodsDetailWrapper">
       <!-- 商品图 -->
       <div class="goodsImage">
-        <img :src="goodsInfo.small_image"
-             alt="">
+        <img :src="goodsInfo.url" alt>
       </div>
       <!-- 限时抢购  -->
-      <div class="flash"
-           v-show="goodsInfo.isFlash">
-        <div class="flashLeft">
-          <span>{{$t('home.limitBuy')}}</span>
-          <i>{{$t('goodsDetail.shopping')}}</i>
+        <div class="flash" v-show="isFlash">
+          <div class="flashLeft">
+            <span>限时抢购</span>
+          </div>
+          <div class="flashRight">
+            <span>距离结束还有</span>
+            <!-- 倒计时 -->
+            <van-count-down :time="time" class="countStyle" format="HH mm ss">
+              <template v-slot="timeData">
+                <span class="item">{{ timeData.hours }}</span>
+                <i>:</i>
+                <span class="item">{{ timeData.minutes }}</span>
+                <i>:</i>
+                <span class="item">{{ timeData.seconds }}</span>
+              </template>
+            </van-count-down>
+          </div>
         </div>
-        <div class="flashRight">
-          <span>{{$t('goodsDetail.end')}}</span>
-          <!-- 倒计时 -->
-          <van-count-down :time="time"
-                          class="countStyle"
-                          format="HH mm ss">
-            <template v-slot="timeData">
-              <span class="item">{{ timeData.hours }}</span>
-              <i>:</i>
-              <span class="item">{{ timeData.minutes }}</span>
-              <i>:</i>
-              <span class="item">{{ timeData.seconds }}</span>
-            </template>
-          </van-count-down>
-        </div>
-      </div>
       <!-- 商品名称 -->
       <div class="productInfo">
-        <div class="title">{{goodsInfo.name}}</div>
-        <div class="subTitle">{{goodsInfo.spec}}</div>
-        <span class="originPrice">{{goodsInfo.origin_price | moneyFormat}}</span>
-        <span class="price">{{goodsInfo.price}}</span>
-        <span class="totalSales">{{$t('goodsDetail.sold')}}:{{goodsInfo.total_sales}}</span>
-        <van-divider />
+        <div class="title">{{goodsInfo.goods_name}}</div>
+        <div class="subTitle">{{goodsInfo.description}}</div>
+        <span class="originPrice">￥{{goodsInfo.formerPrice}}</span>
+        <span class="price">￥{{goodsInfo.nowPrice}}</span>
+        <span class="totalSales">已售:{{goodsInfo.total_sales}}</span>
+        <van-divider/>
         <div class="shippingInfo">
-          <van-icon name="cluster-o" />{{$t('goodsDetail.goodsTips')}}</div>
-        <van-divider />
+          运费：免运费
+        </div>
+        <van-divider/>
         <div class="shippingInfo">
-          <van-icon name="clock-o" />{{$t('goodsDetail.quickTime')}}</div>
+          商家保证：最迟15天内发货
+        </div>
       </div>
       <!-- 规格 -->
       <div class="specifications">
-        <div class="specificationsTitle">{{$t('goodsDetail.specifications')}} </div>
-        <van-divider dashed />
+        <div class="specificationsTitle">规格</div>
+        <van-divider dashed/>
         <div class="conditions">
-          <span>{{$t('goodsDetail.preservationConditions')}}</span>
-          <span class="conditionsOne">{{$t('goodsDetail.coldStorage')}}</span>
+          <span>保存条件</span>
+          <span class="conditionsOne">冷藏</span>
         </div>
-        <van-divider dashed />
+        <van-divider dashed/>
         <div class="conditions">
-          <span>{{$t('goodsDetail.shelfLife')}}</span>
-          <span class="conditionsTwo">{{$t('goodsDetail.day')}}</span>
+          <span>保质期</span>
+          <span class="conditionsTwo">15天</span>
         </div>
-        <van-divider dashed />
+        <van-divider dashed/>
       </div>
       <div class="showGoods">
-        <img :src="goodsInfo.small_image"
-             alt="">
-        <img :src="goodsImage"
-             alt="">
+        <img :src="goodsInfo.url" alt>
+        <img src="../../assets/detailImage.jpg">
+        <br><br><br>
       </div>
 
       <!-- 底部商品导航    -->
-      <van-goods-action :safe-area-inset-bottom=true
-                        style="z-index:100">
-        <van-goods-action-icon icon="cart-o"
-                               :info="goodsNum"
-                               @click="onClickCar" />
-        <van-goods-action-button type="warning"
-                                 :text="$t('goodsDetail.addToCar')"
-                                 @click="onClickAddToCar" />
+      <van-goods-action :safe-area-inset-bottom="true" style="">
+        <!-- <van-goods-action-icon icon="cart-o" :info="goodsNum" @click="onClickCar"/> -->
+        <van-goods-action-button type="warning" text="加入购物车" @click="onClickAddToCar"/>
+        <van-goods-action-button type="danger" text="立即购买" @click="onClickBuy"/>
       </van-goods-action>
     </div>
-
-    <!-- 回到顶部按钮 -->
-    <v-top />
   </div>
 </template>
 
 <script type="text/javascript">
-import { mapState, mapMutations } from 'vuex'
+// import { mapState, mapMutations } from "vuex";
+import { Toast, NavBar } from "vant"
+import Vue from "vue"
+// import { NavBar } from 'vant'
+
+Vue.use(NavBar)
 
 export default {
-  data () {
+  data() {
     return {
       // 倒计时时间设置
       time: 30 * 60 * 1000 * 100,
       // 是否是限时抢购
       isFlash: false,
-      goodsInfo: this.$route.query,
-      goodsImage: ''
+      goodsInfo: {}
     }
   },
   computed: {
-    ...mapState(['shopCart'])
+    // ...mapState(["shopCart"])
     // 购物车商品数量
     // goodsNum () {
     //   let num = 0
@@ -114,19 +103,23 @@ export default {
     //   }
     // }
   },
+  created () {
+    this.goodsInfo = this.$route.params.goodsInfo
+    this.isFlash = this.$route.params.isFlash
+    // console.log(this.goodsInfo)
+  },
   methods: {
-    ...mapMutations(['ADD_TO_CART']),
+    // ...mapMutations(["ADD_TO_CART"]),
     // 返回
     onClickLeft () {
       this.$router.go(-1)
     },
-    // 加入购物车
     onClickAddToCar () {
-      this.ADD_TO_CART(this.goodsInfo)
+      // this.ADD_TO_CART(this.goodsInfo);
+      Toast("加入了购物车")
     },
-    // 点击了购物车
-    onClickCar () {
-      this.$router.push({ name: 'cart' })
+    onClickBuy () {
+      Toast('立即购买')
     }
   }
 }
@@ -151,8 +144,8 @@ export default {
       height: 2rem;
       line-height: 2rem;
       .flashLeft {
-        width: 55%;
-        background-color: #e25450;
+        width: 35%;
+        background-color: #FF5000;
         span {
           font-size: 0.8rem;
           color: #ffffff;
@@ -165,13 +158,13 @@ export default {
         }
       }
       .flashRight {
-        width: 45%;
+        width: 70%;
         background-color: #fcefe9;
         height: 2rem;
         line-height: 2rem;
         padding-left: 0.5rem;
         font-size: 0.5rem;
-        color: #e25450;
+        color: #FF5000;
         .countStyle {
           display: inline;
           margin-left: 0.3rem;
@@ -182,10 +175,10 @@ export default {
             color: #fff;
             font-size: 12px;
             text-align: center;
-            background-color: #e25450;
+            background-color: #FF5000;
           }
           i {
-            color: #e25450;
+            color: #FF5000;
             padding-right: 0.2rem;
           }
         }
@@ -204,7 +197,7 @@ export default {
         font-size: 0.6rem;
       }
       .originPrice {
-        color: #e25450;
+        color: #FF5000;
         padding-right: 0.5rem;
         font-size: 0.8rem;
       }
@@ -215,13 +208,15 @@ export default {
       }
       .totalSales {
         float: right;
-        color: #e25450;
+        color: #FF5000;
         font-size: 0.8rem;
       }
       .shippingInfo {
         font-size: 0.6rem;
         height: 0.8rem;
         color: grey;
+        margin-bottom: 7px;
+        margin-left: 5px;
       }
     }
     .specifications {

@@ -26,7 +26,13 @@ import {
   Image,
   CountDown,
   Divider,
-  List
+  List,
+  GoodsAction,
+  GoodsActionIcon,
+  GoodsActionButton,
+  Field,
+  Sidebar,
+  SidebarItem
 } from 'vant'
 
 Vue.use(Toast)
@@ -50,9 +56,21 @@ Vue.use(Toast)
   .use(CountDown)
   .use(Divider)
   .use(List)
+  .use(GoodsAction)
+  .use(GoodsActionIcon)
+  .use(GoodsActionButton)
+  .use(Field)
+  .use(Sidebar)
+  .use(SidebarItem)
 Vue.config.productionTip = false
 // Vue.prototype.$api = api
 axios.defaults.baseURL = "http://119.3.208.63:8000"
+
+// 路由跳转后页面定位到顶部
+router.afterEach((to,from,next) => {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
+})
 
 new Vue({
   router,
