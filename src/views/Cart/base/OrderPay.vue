@@ -107,6 +107,8 @@ export default {
         if (this.value == "123456") {
           this.showPassWord = !this.showPassWord
           this.$toast.clear()
+          // 调用订单支付接口，现在缺少一个order_id
+          this.$api.cartData.payOrder(1)
           this.$router.push("/paysuccess")
           //   this.$toast.success('支付成功');
         } else {

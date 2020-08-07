@@ -10,9 +10,12 @@ import detailData from "./requestApi/detailData"
 
 // 购物车数据请求
 import cartData from "./requestApi/cartData"
+// 地址管理
+import address from "./requestApi/address.js"
 
 export default {
   homeData,
   detailData,
-  cartData
+  cartData,
+  address
 }

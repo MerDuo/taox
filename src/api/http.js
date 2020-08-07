@@ -9,7 +9,7 @@ import {
  * 根据环境变量进行区分
  */
 axios.defaults.baseURL = "http://119.3.208.63:8000"
-
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 switch (process.env.NODE_EDV) {
   // 开发环境
   case "development":
@@ -67,25 +67,25 @@ axios.defaults.withCredentials = true
 //  * 设置请求拦截器
 //  */
 
-// axios.interceptors.request.use(
-//   config => {
-//     // 设置请求前loading
-//     Toast.loading({
-//       mask: true,
-//       duration: 1000,
-//       message: "加载中..."
-//     })
-//     // 添加TOKEN验证，可以从本地存储中获值，也可以从vuex中取值，主要是看自己怎么存储值的。
-//     // JWT实现TOKEN校验
-//     const token = localStorage.getItem("token")
-//     token && (config.headers.Authorization = token)
-//     return config
-//   },
-//   error => {
-//     // 请求失败时
-//     return Promise.reject(error)
-//   }
-// )
+axios.interceptors.request.use(
+  config => {
+    // 设置请求前loading
+    Toast.loading({
+      mask: true,
+      duration: 1000,
+      message: "加载中..."
+    })
+    // 添加TOKEN验证，可以从本地存储中获值，也可以从vuex中取值，主要是看自己怎么存储值的。
+    // JWT实现TOKEN校验
+    const token = localStorage.getItem('Authorization')
+    token && (config.headers.Authorization = token)
+    return config
+  },
+  error => {
+    // 请求失败时
+    return Promise.reject(error)
+  }
+)
 
 /*
  * 设置响应拦截器

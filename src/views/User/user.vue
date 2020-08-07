@@ -1,8 +1,11 @@
 <template>
   <div class="user-center">
     <!-- 顶部导航 -->
-    <van-nav-bar class="bgcolor" fixed left-arrow @click-left="onBack">
+    <van-nav-bar class="bgcolor" fixed left-arrow @click-left="onBack" @click-right="onClickRight">
       <div slot="title" :style="{opacity:scrollTop}">个人中心</div>
+      <div slot="right" class="nav-right">
+        退出
+      </div>
     </van-nav-bar>
     <!-- 用户头像，二维码信息 -->
     <user-info></user-info>
@@ -53,8 +56,14 @@
       onChange(index) {
         this.active = index
       },
+      onClickRight() {
+        localStorage.removeItem('Authorization')
+        this.$router.push("/")
+        this.$store.commit('onChange', 0)
+      },
       onBack() {
         this.$router.push("/")
+        this.$store.commit('onChange', 0)
       },
       scroll() {
         const top =

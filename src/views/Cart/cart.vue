@@ -15,7 +15,7 @@
           <template #footer>
             <!-- <van-stepper v-model="goods_count" min="1" max="9999" integer/> -->
             <van-button size="mini" @click="reduce(cart.goods_id)">-1</van-button>&nbsp;
-            <van-button size="mini" @click="add(cart.goods_id)">+1</van-button>
+            // <van-button size="mini" @click="add(cart.goods_id)">+1</van-button>
           </template>
         </van-card>
         <template #right>
@@ -113,11 +113,11 @@
           this.totleMoney += parseInt(this.cartList[i].goods_count) * parseInt(this.cartList[i].selling_price) * 100
         }
         // 传userId给后台修改数据表
-        // this.$api.cartData.changeCount(goodsId, goodsCount).then(({
-        //   data
-        // }) => {
-        //   // console.log(data)
-        // })
+        this.$api.cartData.changeCount(goodsId, -1).then(({
+          data
+        }) => {
+          // console.log(data)
+        })
       },
       add(goodsId) {
         console.log(goodsId)
@@ -132,61 +132,54 @@
         for (i = 0; i < this.cartList.length; i++) {
           this.totleMoney += parseInt(this.cartList[i].goods_count) * parseInt(this.cartList[i].selling_price) * 100
         }
-        // // 传userId给后台修改数据表
-        // this.$api.cartData.changeCount(this.userId, goodsId, goodsCount).then(({
-        //   data
-        // }) => {
-        //   // console.log(data)
-        // })
+        // 传userId给后台修改数据表
+        this.$api.cartData.changeCount(goodsId, 1).then(({
+          data
+        }) => {
+          // console.log(data)
+        })
       }
     },
     created() {
-      // this.$api.cartData.getData().then(({
-      //   data
-      // }) => {
-      //   console.log(data)
-      //   // var list = []
-      //   // list[]
-      //   // this.cartList = data
-      // })
+      this.$api.cartData.getData()
       this.$store.commit('onChange', 3)
-      this.cartList = [{
-          goods_id: 0,
-          goods_count: 2,
-          goods_name: "牙膏",
-          selling_price: 315
-        },
-        {
-          goods_id: 1,
-          goods_count: 4,
-          goods_name: "毛巾",
-          selling_price: 21
-        },
-        {
-          goods_id: 3,
-          goods_count: 3,
-          goods_name: "拖鞋",
-          selling_price: 56
-        },
-        {
-          goods_id: 4,
-          goods_count: 3,
-          goods_name: "拖鞋",
-          selling_price: 56
-        },
-        {
-          goods_id: 5,
-          goods_count: 3,
-          goods_name: "拖鞋",
-          selling_price: 56
-        },
-        {
-          goods_id: 6,
-          goods_count: 3,
-          goods_name: "拖鞋",
-          selling_price: 56
-        }
-      ]
+      // this.cartList = [{
+      //     goods_id: 0,
+      //     goods_count: 2,
+      //     goods_name: "牙膏",
+      //     selling_price: 315
+      //   },
+      //   {
+      //     goods_id: 1,
+      //     goods_count: 4,
+      //     goods_name: "毛巾",
+      //     selling_price: 21
+      //   },
+      //   {
+      //     goods_id: 3,
+      //     goods_count: 3,
+      //     goods_name: "拖鞋",
+      //     selling_price: 56
+      //   },
+      //   {
+      //     goods_id: 4,
+      //     goods_count: 3,
+      //     goods_name: "拖鞋",
+      //     selling_price: 56
+      //   },
+      //   {
+      //     goods_id: 5,
+      //     goods_count: 3,
+      //     goods_name: "拖鞋",
+      //     selling_price: 56
+      //   },
+      //   {
+      //     goods_id: 6,
+      //     goods_count: 3,
+      //     goods_name: "拖鞋",
+      //     selling_price: 56
+      //   }
+      // ]
       if (this.cartList.length == 0) {
         this.cartNull = true
       }

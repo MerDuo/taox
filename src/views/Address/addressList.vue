@@ -48,6 +48,9 @@
         // Toast('编辑地址:' + index)
         console.log(item)
       }
+    },
+    created() {
+      this.$api.address.getAddress()
     }
   }
 </script>

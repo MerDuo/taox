@@ -1,13 +1,13 @@
 <template>
   <div class="order-card">
-    <van-panel title="订单号：T20191203" status="已完成" class="m-b-10 b-r-10" v-for="(item,index) in 2" :key="index">
+    <van-panel title="订单号：T20191203" status="已完成" class="m-b-10 b-r-10" v-for="(item,index) in 1" :key="index">
       <div class="content" @click="jumoToDetial">
-        <van-card class="bg-white" num="2" price="35.9" desc="黑色/38码" title="【真兔毛】加绒厚底内增高短筒雪地靴毛毛短靴女冬季新款棉鞋2019" thumb="http://t00img.yangkeduo.com/goods/images/2018-10-16/26c747c3d63bb5e2a545e821856d2cd4.jpeg?imageMogr2/sharpen/1%7CimageView2/2/w/300/q/70/format/webp"
-          v-for="(item,index) in 2" :key="index" />
+        <van-card class="bg-white" num="1" price="130.00" desc="400ml" title="无印良品 MUJI 平衡高保湿化妆水" thumb="http://119.3.208.63:8000/static/img/goods-img/16230038-bf86-4d4e-a11f-954b9ee4bab2.jpg"
+          v-for="(item,index) in 1" :key="index" />
       </div>
       <div slot="footer" class="footer">
         <div class="info">
-          <div class="total">共4件商品合计：￥123.1.00</div>
+          <div class="total">共1件商品合计：￥130.00</div>
           <div class="btn">
             <van-button plain size="mini" round>查看发票</van-button>
             <van-button plain size="mini" round type="danger">评价晒单</van-button>
