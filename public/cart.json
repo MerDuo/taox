@@ -1,0 +1,20 @@
+[
+	{
+		"goods_id":0,
+		"goods_count":2,
+		"goods_name":"牙膏",
+		"selling_price":315
+	},
+	{
+		"goods_id":1,
+		"goods_count":4,
+		"goods_name":"毛巾",
+		"selling_price":21
+	},
+	{
+		"goods_id":3,
+		"goods_count":3,
+		"goods_name":"拖鞋",
+		"selling_price":56
+	}
+]

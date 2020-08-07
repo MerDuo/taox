@@ -8,7 +8,11 @@ import homeData from "./requestApi/homeData"
 // 商品详情页请求接口
 import detailData from "./requestApi/detailData"
 
+// 购物车数据请求
+import cartData from "./requestApi/cartData"
+
 export default {
   homeData,
-  detailData
+  detailData,
+  cartData
 }

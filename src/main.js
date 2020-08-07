@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import api from "./api/index"
+import api from "./api/index"
 import axios from 'axios'
 
 import {
@@ -32,7 +32,19 @@ import {
   GoodsActionButton,
   Field,
   Sidebar,
-  SidebarItem
+  SidebarItem,
+   SwipeCell,
+   Card,
+   Tag,
+   SubmitBar,
+   AddressEdit,
+   AddressList,
+   Sticky,
+   Tab,
+   Tabs,
+   Image as VanImage,
+   NoticeBar,
+   ShareSheet
 } from 'vant'
 
 Vue.use(Toast)
@@ -62,8 +74,20 @@ Vue.use(Toast)
   .use(Field)
   .use(Sidebar)
   .use(SidebarItem)
+  .use(SwipeCell)
+  .use(Card)
+  .use(Tag)
+  .use(SubmitBar)
+  .use(AddressEdit)
+  .use(AddressList)
+  .use(Sticky)
+  .use(VanImage)
+  .use(Tab)
+  .use(Tabs)
+  .use(NoticeBar)
+  .use(ShareSheet)
 Vue.config.productionTip = false
-// Vue.prototype.$api = api
+Vue.prototype.$api = api
 axios.defaults.baseURL = "http://119.3.208.63:8000"
 
 // 路由跳转后页面定位到顶部

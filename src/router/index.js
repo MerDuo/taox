@@ -17,6 +17,13 @@ const Detail = () => import('../views/Detail/detail.vue')
 const Login = () => import('../views/Login/login.vue')
 // 分类
 const Category = () => import('../views/Category/category.vue')
+// 修改地址
+const AddressEdit = () => import('../views/Address/addressEdit.vue')
+// 地址列表
+const AddressList = () => import('../views/Address/addressList.vue')
+// 发现
+const Find = () => import('../views/Find/find.vue')
+
 const routes = [
   {
     path: '/',
@@ -46,6 +53,18 @@ const routes = [
   {
     path: '/category',
     component: Category
+  },
+  {
+    path: '/addressEdit',
+    component: AddressEdit
+  },
+  {
+    path: '/addressList',
+    component: AddressList
+  },
+  {
+    path: '/find',
+    component: Find
   }
 ]
 
