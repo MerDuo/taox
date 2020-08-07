@@ -18,9 +18,6 @@
       }
     },
     async created () {
-      if (localStorage.getItem('Authorization') === null){
-        
-      }
       this.$api.homeData.banner().then(res => {
         this.images = [].concat(res.data.data)
         // console.log(this.images)
