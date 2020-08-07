@@ -33,18 +33,29 @@ import {
   Field,
   Sidebar,
   SidebarItem,
-   SwipeCell,
-   Card,
-   Tag,
-   SubmitBar,
-   AddressEdit,
-   AddressList,
-   Sticky,
-   Tab,
-   Tabs,
-   Image as VanImage,
-   NoticeBar,
-   ShareSheet
+  SwipeCell,
+  Card,
+  Tag,
+  SubmitBar,
+  AddressEdit,
+  AddressList,
+  Sticky,
+  Tab,
+  Tabs,
+  Image as VanImage,
+  NoticeBar,
+  ShareSheet,
+  Popup,
+  CouponCell,
+  CouponList,
+  Panel,
+  Step,
+  Steps,
+  RadioGroup,
+  Radio,
+  PasswordInput,
+  NumberKeyboard,
+  Empty
 } from 'vant'
 
 Vue.use(Toast)
@@ -86,12 +97,23 @@ Vue.use(Toast)
   .use(Tabs)
   .use(NoticeBar)
   .use(ShareSheet)
+  .use(Popup)
+  .use(CouponCell)
+  .use(CouponList)
+  .use(Panel)
+  .use(Step)
+  .use(Steps)
+  .use(Radio)
+  .use(RadioGroup)
+  .use(PasswordInput)
+  .use(NumberKeyboard)
+  .use(Empty)
 Vue.config.productionTip = false
 Vue.prototype.$api = api
-axios.defaults.baseURL = "http://119.3.208.63:8000"
+// axios.defaults.baseURL = "http://119.3.208.63:8000"
 
 // 路由跳转后页面定位到顶部
-router.afterEach((to,from,next) => {
+router.afterEach((to, from, next) => {
   document.body.scrollTop = 0
   document.documentElement.scrollTop = 0
 })

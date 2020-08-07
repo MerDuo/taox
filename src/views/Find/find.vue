@@ -11,19 +11,22 @@
         <!-- 选项卡 -->
         <van-tabs
             sticky
+            animated
+            swipeable
+            color="FF5000"
             :offset-top="offsetTop"
             v-model="active"
-            title-active-color="#ee0a24"
+            title-active-color="#FF5000"
             :swipe-threshold="6"
         >
             <van-tab title="全部">
-                <panel-card v-for="item in 3" :key="item"></panel-card>
+                <panel-card v-for="item in 1" :key="item"></panel-card>
             </van-tab>
-            <van-tab title="美妆">美妆内容</van-tab>
-            <van-tab title="新品">新品内容</van-tab>
-            <van-tab title="晒单">晒单</van-tab>
-            <van-tab title="晒单">晒单</van-tab>
-            <van-tab title="晒单">晒单</van-tab>
+            <van-tab title="美妆"><empty></empty></van-tab>
+            <van-tab title="食品"><empty></empty></van-tab>
+            <van-tab title="运动"><empty></empty></van-tab>
+            <van-tab title="户外"><empty></empty></van-tab>
+            <van-tab title="母婴"><empty></empty></van-tab>
         </van-tabs>
         <!-- 底部导航 -->
         <menu-bar></menu-bar>
@@ -33,10 +36,12 @@
 <script>
 import MenuBar from "../../components/MenuBar"
 import PanelCard from "./base/PanelCard"
+import Empty from "../../components/empty.vue"
 export default {
     components: {
         MenuBar,
-        PanelCard
+        PanelCard,
+        Empty
     },
     data() {
         return {
@@ -47,7 +52,10 @@ export default {
     mounted() {
         this.offsetTop = this.$refs.navbar.offsetHeight
     },
-    methods: {}
+    methods: {},
+    created() {
+      this.$store.commit('onChange', 2)
+    }
 }
 </script>
 

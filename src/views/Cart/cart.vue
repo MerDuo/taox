@@ -4,6 +4,7 @@
     <!-- 顶部导航 -->
     <van-nav-bar title="购物车" right-text="管理" left-arrow @click-left="onClickLeft" @click-right="onClickRight" />
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <div v-if="cartNull == true"><empty></empty></div>
       <van-swipe-cell v-for="(cart,index) in cartList" :key="index">
         <van-card v-bind:num="cart.goods_count" v-bind:price="cart.selling_price" desc="描述信息" v-bind:title="cart.goods_name"
           thumb="https://img.yzcdn.cn/vant/ipad.jpeg">
@@ -33,29 +34,43 @@
 </template>
 
 <script>
+  import Empty from "../../components/empty.vue"
   // import menuBar from '../../components/MenuBar.vue'
   export default {
     components: {
       // menuBar
+      Empty
     },
     data() {
       return {
         isLoading: false,
         cartList: [],
         userId: 1,
-        totleMoney: 0
+        totleMoney: 0,
+        cartNull: false
       }
     },
     methods: {
+      // 提交购物车，创建订单
       onSubmit() {
-        this.$toast("提交")
+        this.$api.cartData.createOrder(this.cartList).then(function(response) {
+            console.log(response)
+          })
+          .catch(function(error) {
+            console.log(error)
+          })
+        this.$router.push('/orderpay')
       },
+      // 编辑地址
       onClickEditAddress() {
         this.$router.push('/addressList')
       },
+      // 返回
       onClickLeft() {
+        this.$store.commit('onChange', 0)
         this.$router.push('/')
       },
+      // 提示窗
       onClickRight() {
         this.$toast({
           message: '左滑删除商品',
@@ -98,11 +113,11 @@
           this.totleMoney += parseInt(this.cartList[i].goods_count) * parseInt(this.cartList[i].selling_price) * 100
         }
         // 传userId给后台修改数据表
-        this.$api.cartData.changeCount(this.userId, goodsId, goodsCount).then(({
-          data
-        }) => {
-          // console.log(data)
-        })
+        // this.$api.cartData.changeCount(goodsId, goodsCount).then(({
+        //   data
+        // }) => {
+        //   // console.log(data)
+        // })
       },
       add(goodsId) {
         console.log(goodsId)
@@ -117,21 +132,24 @@
         for (i = 0; i < this.cartList.length; i++) {
           this.totleMoney += parseInt(this.cartList[i].goods_count) * parseInt(this.cartList[i].selling_price) * 100
         }
-        // 传userId给后台修改数据表
-        this.$api.cartData.changeCount(this.userId, goodsId, goodsCount).then(({
-          data
-        }) => {
-          // console.log(data)
-        })
+        // // 传userId给后台修改数据表
+        // this.$api.cartData.changeCount(this.userId, goodsId, goodsCount).then(({
+        //   data
+        // }) => {
+        //   // console.log(data)
+        // })
       }
     },
     created() {
-      // this.$api.cartData.getData(this.userId).then(({
+      // this.$api.cartData.getData().then(({
       //   data
       // }) => {
       //   console.log(data)
-      //   this.cartList = data
+      //   // var list = []
+      //   // list[]
+      //   // this.cartList = data
       // })
+      this.$store.commit('onChange', 3)
       this.cartList = [{
           goods_id: 0,
           goods_count: 2,
@@ -169,6 +187,10 @@
           selling_price: 56
         }
       ]
+      if (this.cartList.length == 0) {
+        this.cartNull = true
+      }
+      console.log(this.cartNull)
       for (var i = 0; i < this.cartList.length; i++) {
         this.totleMoney += parseInt(this.cartList[i].goods_count) * parseInt(this.cartList[i].selling_price) * 100
       }

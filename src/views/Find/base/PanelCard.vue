@@ -5,7 +5,7 @@
       <van-row type="flex" justify="space-between" align="center">
         <van-col class="user-info">
           <div class="user-avatar">
-            <van-image width="40" height="40" lazy-load src="http://img1.mukewang.com/5b8cf26f0001b4f402000190-100-100.jpg"
+            <van-image width="40" height="40" lazy-load src="https://img.xiaohongshu.com/avatar/5e7ce0c487b18e0001a99d6f.jpg@240w_240h_90q_1e_1c_1x.jpg"
               type="contain" />
           </div>
           <div class="user-name-time">
@@ -16,19 +16,19 @@
         <van-col class="scan">423阅读</van-col>
       </van-row>
       <!-- 标题 -->
-      <div class="title">这里是标题内容,你能看得见吗?这里是标题内容,你能看得见吗?这里是标题内容,你能看得见吗?</div>
+      <div class="van-multi-ellipsis--l2">最近好多小宝贝来问我英文名，所以今天随手搞了个小测试，上面都是我个人超喜欢的一些英文名。听说有种喜欢就是一见钟情😋</div>
       <!-- 图片 -->
       <van-row class="img-wrapper">
         <van-col :span="8">
-          <van-image lazy-load src="http://images.pinduoduo.com/mrk/2019-11-10/94094de2-34d5-4ecd-a326-bf564f5f83ee.jpg"
+          <van-image lazy-load src="http://ci.xiaohongshu.com/9ba1c56c-ae50-595a-bcab-86914a22e308?imageView2/2/w/1080/format/jpg"
             type="contain" />
         </van-col>
         <van-col :span="8">
-          <van-image lazy-load src="http://images.pinduoduo.com/mrk/2019-11-10/94094de2-34d5-4ecd-a326-bf564f5f83ee.jpg"
+          <van-image lazy-load src="https://ci.xiaohongshu.com/5a207881-6a46-53d4-9fa7-9044b1f04c77?imageView2/2/w/1080/format/jpg"
             type="contain" />
         </van-col>
         <van-col :span="8">
-          <van-image lazy-load src="http://images.pinduoduo.com/mrk/2019-11-10/94094de2-34d5-4ecd-a326-bf564f5f83ee.jpg"
+          <van-image lazy-load src="https://ci.xiaohongshu.com/df5b06e3-ef41-5d3a-97bd-d68852b346f1?imageView2/2/w/1080/format/jpg"
             type="contain" />
         </van-col>
       </van-row>
@@ -44,7 +44,7 @@
           <van-share-sheet v-model="showShare" title="分享给好友" :options="options" @select="onSelect" />
         </van-col>
         <van-col>
-          <van-button size="mini" round color="red">去购买</van-button>
+          <van-button size="mini" round color="#FF5000">去购买</van-button>
         </van-col>
       </van-row>
     </div>

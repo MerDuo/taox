@@ -85,60 +85,6 @@ export default {
           nowPrice: 100,
           formerPrice: 120,
           total_sales: 100
-        },
-        {
-          id: 5,
-          url: require('../assets/QQ图片20200326191252.jpg'),
-          goods_name: '丸圆',
-          description: '好吃的丸圆',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        },
-        {
-          id: 6,
-          url: require('../assets/QQ图片20200326191252.jpg'),
-          goods_name: '丸圆',
-          description: '好吃的丸圆',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        },
-        {
-          id: 7,
-          url: require('../assets/QQ图片20200326191252.jpg'),
-          goods_name: '丸圆',
-          description: '好吃的丸圆',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        },
-        {
-          id: 8,
-          url: require('../assets/QQ图片20200326191252.jpg'),
-          goods_name: '丸圆',
-          description: '好吃的丸圆',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        },
-        {
-          id: 9,
-          url: require('../assets/QQ图片20200326191252.jpg'),
-          goods_name: '丸圆',
-          description: '好吃的丸圆',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        },
-        {
-          id: 10,
-          url: require('../assets/QQ图片20200326191252.jpg'),
-          goods_name: '丸圆',
-          description: '好吃的丸圆',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
         }
       ]
     }

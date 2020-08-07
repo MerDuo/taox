@@ -63,6 +63,7 @@ export default {
     this.$nextTick(() => {
       this.initScroll()
     })
+    this.$store.commit('onChange', 1)
   },
   methods: {
     // 初始化better-scroll

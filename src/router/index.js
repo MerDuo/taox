@@ -23,6 +23,16 @@ const AddressEdit = () => import('../views/Address/addressEdit.vue')
 const AddressList = () => import('../views/Address/addressList.vue')
 // 发现
 const Find = () => import('../views/Find/find.vue')
+// 我的
+const User = () => import('../views/User/user.vue')
+// 订单
+const Order = () => import('../views/Order/order.vue')
+// 单个订单详情
+const Logistics = () => import('../views/Order/base/Logistics.vue')
+// 支付页面
+const OrderPay = () => import('../views/Cart/base/OrderPay.vue')
+// 支付成功
+const PaySuccess = () => import('../views/Cart/base/PaySuccess.vue')
 
 const routes = [
   {
@@ -65,6 +75,26 @@ const routes = [
   {
     path: '/find',
     component: Find
+  },
+  {
+    path: '/user',
+    component: User
+  },
+  {
+    path: '/order',
+    component: Order
+  },
+  {
+    path: '/logistics',
+    component: Logistics
+  },
+  {
+    path: '/orderpay',
+    component: OrderPay
+  },
+  {
+    path: '/paysuccess',
+    component: PaySuccess
   }
 ]
 
