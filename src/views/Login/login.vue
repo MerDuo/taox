@@ -102,8 +102,9 @@ export default {
           password: this.password
           }
         }).then(res => {
-          console.log(res.data)
-          _this.userToken = res.data.token
+          // console.log(res.data)
+          _this.userToken = res.data.data.token
+          // console.log(_this.userToken)
           // 将用户token保存到vuex中
           _this.changeLogin({ Authorization: _this.userToken })
           _this.$router.push('/home')

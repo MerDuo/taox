@@ -46,7 +46,7 @@ export default {
   },
   created () {
     this.$api.homeData.spikeGoods().then(res => {
-      this.spikeGoods = [].concat(res.data)
+      this.spikeGoods = [].concat(res.data.data)
     })
   },
   methods: {

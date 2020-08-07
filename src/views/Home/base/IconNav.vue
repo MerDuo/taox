@@ -68,6 +68,7 @@ export default {
     //   })
     // },
     onClick (item) {
+      localStorage.removeItem('Authorization')
       this.$toast(item.name)
     }
   }

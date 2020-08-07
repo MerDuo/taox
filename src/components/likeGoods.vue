@@ -55,7 +55,8 @@ export default {
   },
   created() {
     this.$api.homeData.likeGoods('api/v1/goods/').then(res => {
-      this.goodsData = [].concat(res.data.results)
+      // console.log(res)
+      this.goodsData = [].concat(res.data.data.results)
     })
   },
   methods: {
@@ -64,7 +65,7 @@ export default {
         this.loading = false
         if (this.goodsData.length > 9 * (this.nextPage - 1)){
           this.$api.homeData.likeGoods('api/v1/goods/?page=' + this.nextPage.toString()).then(res => {
-            this.nextGoods = [].concat(res.data.results)
+            this.nextGoods = [].concat(res.data.data.results)
             for (var i = 0; i < 10; i++){
               this.goodsData.push(this.nextGoods[i])
             }

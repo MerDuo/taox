@@ -16,6 +16,7 @@ export default new Vuex.Store({
       state.active2 = index
     },
     changeLogin (state, user) {
+      // console.log(user.Authorization)
       state.Authorization = user.Authorization
       localStorage.setItem('Authorization', user.Authorization)
     }

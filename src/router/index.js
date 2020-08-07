@@ -129,7 +129,7 @@ const router = new VueRouter({
 // 路由守卫
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('Authorization')
-   console.log("token is " + token)
+  // console.log("token is " + token)
   // console.log(to.meta.requireAuth)
   if (to.meta.requireAuth) {
       // console.log('bbb')
