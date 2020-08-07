@@ -68,6 +68,9 @@
         <van-goods-action-button type="warning" text="加入购物车" @click="onClickAddToCar"/>
         <van-goods-action-button type="danger" text="立即购买" @click="onClickBuy"/>
       </van-goods-action>
+
+      <!-- 商品sku -->
+      <good-sku ref="sku" :goodsId="goodsInfo.goods_id" :goods="goodsInfo"></good-sku>
     </div>
   </div>
 </template>
@@ -76,7 +79,7 @@
 // import { mapState, mapMutations } from "vuex";
 import { Toast, NavBar } from "vant"
 import Vue from "vue"
-// import { NavBar } from 'vant'
+import goodSku from './base/goodSku'
 
 Vue.use(NavBar)
 
@@ -90,8 +93,12 @@ export default {
       goodsInfo: {},
       starText: '收藏',
       starColor: '',
-      isStar: false
+      isStar: false,
+      isShowSku: true // 商品的sku显隐
     }
+  },
+  components: {
+    goodSku
   },
   computed: {
     // ...mapState(["shopCart"])
@@ -119,10 +126,10 @@ export default {
     },
     onClickAddToCar () {
       // this.ADD_TO_CART(this.goodsInfo);
-      Toast("加入了购物车")
+      this.$refs.sku._data.showSku = true
     },
     onClickBuy () {
-      Toast('立即购买')
+      this.$refs.sku._data.showSku = true
     },
     onClickChat () {
       Toast('功能未研发')

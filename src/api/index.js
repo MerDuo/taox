@@ -11,8 +11,12 @@ import detailData from "./requestApi/detailData"
 // 购物车数据请求
 import cartData from "./requestApi/cartData"
 
+// 商品分类请求接口
+import categoryData from './requestApi/categoryData'
+
 export default {
   homeData,
   detailData,
-  cartData
+  cartData,
+  categoryData
 }

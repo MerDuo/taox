@@ -22,7 +22,7 @@
       <van-col span="18">
         <div ref="content" class="content-wrapper">
           <!-- 分类内容部分 -->
-          <category-content></category-content>
+          <category-content :ccategory_id="menu[contentActive].category_id" :cname="menu[contentActive].name"></category-content>
         </div>
       </van-col>
     </van-row>
@@ -46,16 +46,13 @@ export default {
       activeKey: 0,
       contentActive: 0,
       menu: [
-        { name: "推荐分类", id: "1" },
-        { name: "进口超市", id: "2" },
-        { name: "国际品牌", id: "3" },
-        { name: "奢侈品", id: "4" },
-        { name: "海囤全球", id: "6" },
-        { name: "男装", id: "7" },
-        { name: "女装", id: "8" },
-        { name: "男鞋", id: "9" },
-        { name: "女鞋", id: "10" },
-        { name: "钟表珠宝", id: "11" }
+        { name: "默认分类", category_id: "0" },
+        { name: "生活电器", category_id: "20" },
+        { name: "荣耀手机", category_id: "45" },
+        { name: "华为手机", category_id: "46" },
+        { name: "iphone", category_id: "47" },
+        { name: "小米手机", category_id: "51" },
+        { name: "口红", category_id: "86" }
       ]
     }
   },
@@ -84,7 +81,7 @@ export default {
     },
     change (index) {
       this.contentActive = index
-      Toast(this.menu[index].name)
+      // Toast(this.menu[index].name)
     }
   },
   beforeDestroy () {
@@ -110,6 +107,7 @@ export default {
     bottom: 50px;
     left: 0;
     overflow: hidden;
+    background-color: #f7f8fa;
   }
   .content-wrapper {
     position: fixed;
@@ -118,6 +116,7 @@ export default {
     overflow: hidden;
     left: 85px;
     right: 0;
+    background-color: #f0efef;
   }
 }
 </style>
