@@ -111,12 +111,25 @@ Vue.use(Toast)
 Vue.config.productionTip = false
 Vue.prototype.$api = api
 // axios.defaults.baseURL = "http://119.3.208.63:8000"
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 // 路由跳转后页面定位到顶部
 router.afterEach((to, from, next) => {
   document.body.scrollTop = 0
   document.documentElement.scrollTop = 0
 })
+
+// axios拦截器
+axios.interceptors.request.use(
+  config => {
+    if (localStorage.getItem('Authorization')) {
+      config.headers.Authorization = localStorage.getItem('Authorization')
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  })
 
 new Vue({
   router,

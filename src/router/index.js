@@ -129,7 +129,7 @@ const router = new VueRouter({
 // 路由守卫
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('Authorization')
-  // console.log("token is " + token)
+   console.log("token is " + token)
   // console.log(to.meta.requireAuth)
   if (to.meta.requireAuth) {
       // console.log('bbb')
@@ -143,4 +143,10 @@ router.beforeEach((to, from, next) => {
       next()
   }
 })
+
+// 重复路由
+const originalPush = VueRouter.prototype.push
+   VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
 export default router

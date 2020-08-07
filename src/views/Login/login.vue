@@ -33,7 +33,8 @@
     </div>
     <div v-else>
       <div class="user-form2">
-      <van-field clearable type="tel" v-model="username" placeholder="请输入用户名"/>
+      <van-field clearable type="text" v-model="username" placeholder="请输入用户名"/>
+      <van-field clearable type="text" v-model="nickname" placeholder="请输入昵称"/>
       <van-field
         type="password"
         clearable
@@ -70,12 +71,14 @@
 <script>
 import { Toast } from 'vant'
 import axios from 'axios'
+import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
       password: "", // 密码
       password2: '',
       username: "", // 用户名
+      nickname: '', // 昵称
       isDisabled: true,
       isLogin: true
     }
@@ -83,32 +86,47 @@ export default {
   created() {
   },
   methods: {
+    ...mapMutations(['changeLogin']),
     // 返回上一页
     handleBack() {
       this.$router.go(-1)
     },
     onLogin() {
-      // setTimeout(() => {
-      //   if (this.userName && this.password) {
-      //     this.$Cookies.set("TOKEN", this.userName, { expires: 7 })
-      //     localStorage.setItem("isLogin", true)
-      //     this.$router.push("/")
-      //     this.$notify({ type: "success", message: "登录成功" })
-      //   }
-      // }, 1000)
+      localStorage.removeItem('Authorization')
+      const _this = this
+      axios({
+          method: 'post',
+          url: '/api/v1/login/',
+          data: {
+          username: this.username,
+          password: this.password
+          }
+        }).then(res => {
+          console.log(res.data)
+          _this.userToken = res.data.token
+          // 将用户token保存到vuex中
+          _this.changeLogin({ Authorization: _this.userToken })
+          _this.$router.push('/home')
+          Toast('登陆成功')
+        }).catch(error => {
+          Toast('账号或密码错误')
+          console.log(error)
+        })
     },
     onRegister () {
+      const This = this
       if (this.password !== this.password2) {
         Toast('两次密码输入不一致')
       } else {
-        axios.post('register/',{
+        axios.post('api/v1/register/',{
           login_name: this.username,
-          user_pwd: this.password
+          nickname: this.nickname,
+          user_pwd: this.password,
+          password2: this.password2
         }).then(res => {
+          // console.log(res)
           Toast('注册成功')
-          this.$router.push('/login')
-        }).catch(e => {
-          Toast('注册失败')
+          This.$router.go(0)
         })
       }
     },

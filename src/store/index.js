@@ -14,6 +14,10 @@ export default new Vuex.Store({
     // MenuBar的active变化时触发
     onChange(state, index){
       state.active2 = index
+    },
+    changeLogin (state, user) {
+      state.Authorization = user.Authorization
+      localStorage.setItem('Authorization', user.Authorization)
     }
   },
   actions: {
