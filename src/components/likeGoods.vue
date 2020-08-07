@@ -8,9 +8,8 @@
     </slot>
     <!-- 商品列表 -->
     <van-list v-model="loading" :finished="finished" finished-text="————  我是有底线的 ————" @load="onLoad">
-      <van-row class="goods-list">
-        <van-col
-          span="12"
+      <van-grid class="goods-list" :column-num="2">
+        <van-grid-item
           v-for="(item,index) in goodsData"
           :key="index"
           @click="goDetail(index)"
@@ -18,14 +17,14 @@
         >
           <div class="goods-item">
             <div class="goods-pic">
-              <img :src="item.url" />
+              <img :src="'http://119.3.208.63:8000' + item.goods_cover_image" />
             </div>
             <div class="goods-info">
               <div class="goods-title">{{item.goods_name}}</div>
-              <div class="goods-num">{{item.description}}</div>
+              <div class="goods-num">{{item.goods_intro}}</div>
               <div class="goods-price">
-                <span>￥{{item.nowPrice}}</span>
-                <s>￥{{item.formerPrice}}</s>
+                <span>￥{{item.selling_price}}</span>
+                <s>￥{{item.original_price}}</s>
               </div>
               <!-- 下单图标 -->
               <div class="buy-icon">
@@ -33,8 +32,8 @@
               </div>
             </div>
           </div>
-        </van-col>
-      </van-row>
+        </van-grid-item>
+      </van-grid>
     </van-list>
   </div>
 </template>
@@ -49,55 +48,29 @@ export default {
     return {
       loading: false,
       finished: false,
-      goodsData: [
-        {
-          id: 1,
-          url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
-          goods_name: '五花肉',
-          description: '好吃的五花肉',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        },
-        {
-          id: 2,
-          url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
-          goods_name: '五花肉',
-          description: '好吃的五花肉',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        },
-        {
-          id: 3,
-          url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
-          goods_name: '五花肉',
-          description: '好吃的五花肉',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        },
-        {
-          id: 4,
-          url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
-          goods_name: '五花肉',
-          description: '好吃的五花肉',
-          nowPrice: 100,
-          formerPrice: 120,
-          total_sales: 100
-        }
-      ]
+      goodsData: [],
+      nextPage: 2,
+      nextGoods: []
     }
   },
   created() {
-    // this.getLikeGoodsData()
+    this.$api.homeData.likeGoods('api/v1/goods/').then(res => {
+      this.goodsData = [].concat(res.data.results)
+    })
   },
   methods: {
     // 商品上拉刷新
     onLoad() {
-        if (this.goodsData.length > 9) {
-          this.finished = true
-          this.loading = false
+        this.loading = false
+        if (this.goodsData.length > 9 * (this.nextPage - 1)){
+          this.$api.homeData.likeGoods('api/v1/goods/?page=' + this.nextPage.toString()).then(res => {
+            this.nextGoods = [].concat(res.data.results)
+            for (var i = 0; i < 10; i++){
+              this.goodsData.push(this.nextGoods[i])
+            }
+            this.nextPage += 1
+            this.nextGoods = []
+          })
         }
     },
     // 跳转到商品详细页
@@ -131,7 +104,7 @@ export default {
       overflow: hidden;
       .goods-item {
         background-color: #fff;
-        box-shadow: 3px 3px 3px rgba($color: #000000, $alpha: 0.1);
+        // box-shadow: 3px 3px 3px rgba($color: #000000, $alpha: 0.1);
         border-radius: 3px;
         .goods-pic {
           img {
@@ -145,7 +118,7 @@ export default {
           // 购买图标
           .buy-icon{
             position: absolute;
-            right: 5px;
+            right: 0;
             bottom: 5px;
             width: 26px;
             height: 26px;
@@ -156,7 +129,7 @@ export default {
             border-radius: 50%;
           }
           .goods-title {
-            font-size: 15px;
+            font-size: 13px;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -167,17 +140,19 @@ export default {
             padding: 5px 0;
             span {
               color:#FF5000;
-              font-size: 16px;
+              font-size: 13px;
               font-weight: bold;
-              margin-right: 5px;
+              margin-left: -5px;
             }
             s {
               color: #bbb;
-              font-size: 10px;
+              font-size: 11px;
+              margin-left: 1px;
             }
           }
           .goods-num {
-            font-size: 13px;
+            font-size: 11px;
+            margin-top: 5px;
             color: #bbb;
           }
         }

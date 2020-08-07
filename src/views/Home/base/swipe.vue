@@ -18,8 +18,8 @@
       }
     },
     async created () {
-      await axios.get('api/v1/banners/').then(res => {
-        this.images = [].concat(res.data.data)
+      this.$api.homeData.banner().then(res => {
+        this.images = [].concat(res.data)
         // console.log(this.images)
       })
       .catch(function (error) {
@@ -38,7 +38,6 @@
   .swiper-wrapper {
       width: 95%;
       margin: auto;
-      height: 140px;
       margin-top: 10px;
       border-radius: 5px;
       overflow: hidden;

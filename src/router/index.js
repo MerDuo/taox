@@ -49,7 +49,10 @@ const routes = [
   },
   {
     path: '/cart',
-    component: Cart
+    component: Cart,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     name: 'detail',
@@ -66,23 +69,38 @@ const routes = [
   },
   {
     path: '/addressEdit',
-    component: AddressEdit
+    component: AddressEdit,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/addressList',
-    component: AddressList
+    component: AddressList,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/find',
-    component: Find
+    component: Find,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/user',
-    component: User
+    component: User,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/order',
-    component: Order
+    component: Order,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/logistics',
@@ -90,11 +108,17 @@ const routes = [
   },
   {
     path: '/orderpay',
-    component: OrderPay
+    component: OrderPay,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/paysuccess',
-    component: PaySuccess
+    component: PaySuccess,
+    meta: {
+      requireAuth: true
+    }
   }
 ]
 
@@ -102,4 +126,21 @@ const router = new VueRouter({
   routes
 })
 
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('Authorization')
+  // console.log("token is " + token)
+  // console.log(to.meta.requireAuth)
+  if (to.meta.requireAuth) {
+      // console.log('bbb')
+      if (token === null || token === 'null' || token === '') {
+          // console.log('aaa')
+          next('/login')
+      } else {
+        next()
+      }
+  } else {
+      next()
+  }
+})
 export default router

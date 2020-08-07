@@ -4,7 +4,7 @@
     <div class="goodsDetailWrapper">
       <!-- 商品图 -->
       <div class="goodsImage">
-        <img :src="goodsInfo.url" alt>
+        <img :src="'http://119.3.208.63:8000' + goodsInfo.goods_cover_image" alt>
       </div>
       <!-- 限时抢购  -->
         <div class="flash" v-show="isFlash">
@@ -28,10 +28,9 @@
       <!-- 商品名称 -->
       <div class="productInfo">
         <div class="title">{{goodsInfo.goods_name}}</div>
-        <div class="subTitle">{{goodsInfo.description}}</div>
-        <span class="originPrice">￥{{goodsInfo.formerPrice}}</span>
-        <span class="price">￥{{goodsInfo.nowPrice}}</span>
-        <span class="totalSales">已售:{{goodsInfo.total_sales}}</span>
+        <div class="subTitle">{{goodsInfo.goods_intro}}</div>
+        <span class="originPrice">￥{{goodsInfo.original_price}}</span>
+        <span class="price">￥{{goodsInfo.selling_price}}</span>
         <van-divider/>
         <div class="shippingInfo">
           运费：免运费
@@ -43,28 +42,29 @@
       </div>
       <!-- 规格 -->
       <div class="specifications">
-        <div class="specificationsTitle">规格</div>
+        <div class="specificationsTitle">商品信息</div>
         <van-divider dashed/>
         <div class="conditions">
-          <span>保存条件</span>
-          <span class="conditionsOne">冷藏</span>
+          <span>商品简介</span>
+          <span class="conditionsOne">{{goodsInfo.goods_intro}}</span>
         </div>
         <van-divider dashed/>
         <div class="conditions">
-          <span>保质期</span>
-          <span class="conditionsTwo">15天</span>
+          <span>商品详情</span>
+          <span class="conditionsTwo">{{goodsInfo.goods_detail_content}}</span>
         </div>
         <van-divider dashed/>
       </div>
       <div class="showGoods">
-        <img :src="goodsInfo.url" alt>
+        <img :src="'http://119.3.208.63:8000' + goodsInfo.goods_cover_image" alt>
         <img src="../../assets/detailImage.jpg">
         <br><br><br>
       </div>
 
       <!-- 底部商品导航    -->
       <van-goods-action :safe-area-inset-bottom="true" style="">
-        <!-- <van-goods-action-icon icon="cart-o" :info="goodsNum" @click="onClickCar"/> -->
+        <van-goods-action-icon icon="chat-o" text="客服" @click="onClickChat"/>
+        <van-goods-action-icon icon="star" :color="starColor" :text="starText" @click="onClickStar"/>
         <van-goods-action-button type="warning" text="加入购物车" @click="onClickAddToCar"/>
         <van-goods-action-button type="danger" text="立即购买" @click="onClickBuy"/>
       </van-goods-action>
@@ -87,7 +87,10 @@ export default {
       time: 30 * 60 * 1000 * 100,
       // 是否是限时抢购
       isFlash: false,
-      goodsInfo: {}
+      goodsInfo: {},
+      starText: '收藏',
+      starColor: '',
+      isStar: false
     }
   },
   computed: {
@@ -120,6 +123,23 @@ export default {
     },
     onClickBuy () {
       Toast('立即购买')
+    },
+    onClickChat () {
+      Toast('功能未研发')
+    },
+    onClickStar () {
+      // console.log('aaa')
+      if (this.isStar){
+        this.isStar = false
+        this.starColor = ''
+        this.starText = '收藏'
+        Toast('取消收藏成功')
+      } else {
+        this.isStar = true
+        this.starColor = '#FF5000'
+        this.starText = '已收藏'
+        Toast('收藏成功')
+      }
     }
   }
 }
@@ -237,7 +257,7 @@ export default {
           padding-left: 2rem;
         }
         .conditionsTwo {
-          padding-left: 2.5rem;
+          padding-left: 2rem;
         }
       }
     }

@@ -63,29 +63,50 @@ export default {
       keywords: '',
       historyList: [],
       hotList: [
-        {
-          id: 1,
-          title: '好吃的五花肉',
-          url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
-          nowPrice: 110,
-          formerPrice: 118,
-          total_sales: 100
+       {
+          goods_id: 10029,
+          title: '巨好用的化妆水',
+          goods_name: "无印良品 MUJI 基础润肤化妆水",
+          goods_carousel: "/static/img/goods-img/71d1f469-b77b-473a-a31a-78fc97859b3a.png",
+          goods_cover_image: "/static/img/goods-img/71d1f469-b77b-473a-a31a-78fc97859b3a.png",
+          goods_intro: "清爽型 200ml",
+          goods_category: 0,
+          goods_detail_content: "商品介绍加载中...",
+          original_price: "70.00",
+          selling_price: "70.00",
+          stock_num: 999,
+          tag: "",
+          goods_sell_status: "0"
         },
         {
-          id: 2,
-          title: '好吃的花生酱',
-          url: 'https://ddimg.ddxq.mobi/abf3023fb51611526109391551.jpg!maicai.product.list',
-          nowPrice: 110,
-          formerPrice: 118,
-          total_sales: 100
+          goods_id: 10031,
+          title: '巨好用的洁面',
+          goods_name: "无印良品 MUJI 基础润肤洁面泡沫",
+          goods_carousel: "/static/img/goods-img/679eb5a8-7689-4620-b072-63daeb8eb73a.jpg",
+          goods_cover_image: "/static/img/goods-img/679eb5a8-7689-4620-b072-63daeb8eb73a.jpg",
+          goods_intro: "200ml",
+          goods_category: 0,
+          goods_detail_content: "商品介绍加载中...",
+          original_price: "83.00",
+          selling_price: "83.00",
+          stock_num: 1000,
+          tag: "",
+          goods_sell_status: "0"
         },
         {
-          id: 3,
-          title: '好吃的丸圆',
-          url: require('../../assets/QQ图片20200326191252.jpg'),
-          nowPrice: 110,
-          formerPrice: 118,
-          total_sales: 100
+          goods_id: 10030,
+          title: '巨好穿的睡衣',
+          goods_name: "无印良品 MUJI 男式睡衣",
+          goods_carousel: "/static/img/goods-img/68bfbfd9-bc28-429a-ab2c-7fa62205ed7e.jpg",
+          goods_cover_image: "/static/img/goods-img/68bfbfd9-bc28-429a-ab2c-7fa62205ed7e.jpg",
+          goods_intro: "无侧缝法兰绒 睡衣 海军蓝 L",
+          goods_category: 0,
+          goods_detail_content: "商品介绍加载中...",
+          original_price: "398.00",
+          selling_price: "199.00",
+          stock_num: 1000,
+          tag: "",
+          goods_sell_status: "0"
         }
       ]
     }
@@ -108,8 +129,7 @@ export default {
          name: 'detail',
           params: {
           goodid: index,
-          goodsInfo: this.hotList[index],
-          isFlash: true
+          goodsInfo: this.hotList[index]
         }
       })
     }

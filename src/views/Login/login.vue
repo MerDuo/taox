@@ -4,10 +4,10 @@
     <div class="logo">
       <img src="../../assets/loginHead.png"/>
     </div>
-    <!-- 手机号+密码登录 -->
+    <!-- 用户名+密码登录 -->
     <div v-if="isLogin">
     <div class="user-form">
-      <van-field maxlength="11" clearable type="tel" v-model="phone" placeholder="请输入手机号码"/>
+      <van-field clearable type="text" v-model="username" placeholder="请输入用户名"/>
       <van-field
         type="password"
         clearable
@@ -33,7 +33,7 @@
     </div>
     <div v-else>
       <div class="user-form2">
-      <van-field maxlength="11" clearable type="tel" v-model="phone" placeholder="请输入手机号码"/>
+      <van-field clearable type="tel" v-model="username" placeholder="请输入用户名"/>
       <van-field
         type="password"
         clearable
@@ -69,12 +69,13 @@
 
 <script>
 import { Toast } from 'vant'
+import axios from 'axios'
 export default {
   data() {
     return {
       password: "", // 密码
       password2: '',
-      phone: "", // 手机号
+      username: "", // 用户名
       isDisabled: true,
       isLogin: true
     }
@@ -87,9 +88,6 @@ export default {
       this.$router.go(-1)
     },
     onLogin() {
-      if (!(/^1[3456789]\d{9}$/.test(this.phone))) {
-        Toast("请输入正确的手机号")
-      }
       // setTimeout(() => {
       //   if (this.userName && this.password) {
       //     this.$Cookies.set("TOKEN", this.userName, { expires: 7 })
@@ -100,12 +98,18 @@ export default {
       // }, 1000)
     },
     onRegister () {
-      if (!(/^1[3456789]\d{9}$/.test(this.phone))) {
-        Toast("请输入正确的手机号")
-      } else if (this.password !== this.password2) {
+      if (this.password !== this.password2) {
         Toast('两次密码输入不一致')
       } else {
-        Toast('注册成功')
+        axios.post('register/',{
+          login_name: this.username,
+          user_pwd: this.password
+        }).then(res => {
+          Toast('注册成功')
+          this.$router.push('/login')
+        }).catch(e => {
+          Toast('注册失败')
+        })
       }
     },
     forgetPwd () {
@@ -114,7 +118,7 @@ export default {
   },
   watch: {
     password (val, oldVal) {
-      this.isDisabled = (!this.password || !this.phone)
+      this.isDisabled = (!this.password || !this.username)
     }
   }
 }

@@ -24,12 +24,12 @@
           fit="contain"
           lazy-load
           radius="5px"
-          :src="item.url"
+          :src="'http://119.3.208.63:8000' + item.goods_cover_image"
         />
-        <div class="van-multi-ellipsis--l2">{{item.title}}</div>
+        <div class="van-multi-ellipsis--l2">{{item.goods_name}}</div>
         <div class="price">
-          <span>￥{{item.nowPrice}}</span>
-          <s>￥{{item.formerPrice}}</s>
+          <span>￥{{item.selling_price}}</span>
+          <s>￥{{item.original_price}}</s>
         </div>
       </van-col>
     </van-row>
@@ -41,33 +41,13 @@ export default {
   data () {
     return {
       time: 2 * 60 * 60 * 1000,
-      spikeGoods: [
-        {
-          id: 1,
-          title: '精品五花肉',
-          url: 'https://img.ddimg.mobi/product/4513b9fc5935f1548406258985.jpg!deliver.product.list',
-          nowPrice: 110,
-          formerPrice: 118,
-          total_sales: 100
-        },
-        {
-          id: 2,
-          title: '宝宝花生酱',
-          url: 'https://ddimg.ddxq.mobi/abf3023fb51611526109391551.jpg!maicai.product.list',
-          nowPrice: 110,
-          formerPrice: 118,
-          total_sales: 100
-        },
-        {
-          id: 3,
-          title: '丸圆',
-          url: require('../../../assets/QQ图片20200326191252.jpg'),
-          nowPrice: 110,
-          formerPrice: 118,
-          total_sales: 100
-        }
-      ]
+      spikeGoods: []
     }
+  },
+  created () {
+    this.$api.homeData.spikeGoods().then(res => {
+      this.spikeGoods = [].concat(res.data)
+    })
   },
   methods: {
     goDetail (index) {
@@ -83,7 +63,7 @@ export default {
        })
     },
     moreClick () {
-      Toast('没有更多了')
+      Toast('滑动商品查看更多')
     }
   }
 }
@@ -131,6 +111,10 @@ export default {
       padding: 10px 0;
       margin-right: 7px;
       width: 100%;
+      .van-image {
+        height: 100px;
+        width: 100px;
+      }
       img {
         border-radius: 5px;
       }
@@ -145,7 +129,11 @@ export default {
         s {
           color: #bbb;
           font-size: 10px;
+          margin-top: 2px;
         }
+      }
+      .van-multi-ellipsis--l2 {
+        font-size: 12px;
       }
     }
   }
