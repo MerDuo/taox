@@ -37,7 +37,7 @@
     .user-info-wrapper {
       padding: 0 15px;
       height: 180px;
-      background: linear-gradient(to bottom, #f06c7a 0%, #f06c7a 100%);
+      background: linear-gradient(to bottom, #FF8400 0%, #FF8400 100%);
 
       .user-info {
         display: flex;

@@ -5,18 +5,18 @@
     <van-nav-bar title="支付成功" left-arrow @click-left="onBack" />
     <!-- 成功图标 -->
     <div class="success-icon">
-      <van-icon name="checked" size="80px" color="#fa436a" />
+      <van-icon name="checked" size="80px" color="#FF5000" />
       <span>支付成功</span>
     </div>
     <!-- 成功按钮，查看订单 -->
     <div class="success-btn">
-      <van-button type="danger" class="border-r" @click="CheckOrder" block color="#fa436a">查看订单</van-button>
+      <van-button type="danger" class="border-r" @click="CheckOrder" block color="#FF5000">查看订单</van-button>
       <van-button
         class="mt-10"
         plain
         hairline
         block
-        color="#303133"
+        color="#FF5000"
         @click="goHome"
         type="primary"
       >返回首页</van-button>

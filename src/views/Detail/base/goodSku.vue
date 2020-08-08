@@ -39,7 +39,7 @@
             // s3: "0", // 最多包含3个规格值，为0表示不存在该规格
             stock_num: 110 // 当前 sku 组合对应的库存
           }],
-          price: this.goods.original_price, // 默认价格（单位元）
+          price: this.goods.selling_price, // 默认价格（单位元）
           stock_num: this.goods.stock_num, // 商品总库存
           none_sku: true // 是否无规格商品
         }
@@ -51,11 +51,23 @@
         if (localStorage.getItem('Authorization') !== null) {
           const goodsNum = this.$refs.getSku.getSkuData().selectedNum
           const price = parseFloat(this.goods.selling_price) * goodsNum
+          const id = this.goods.goods_id
+          // console.log(id + ',' + goodsNum)
+          const orderlist = [{
+              goods:{
+                goods_id: id
+              },
+              goods_count: goodsNum
+          }]
           const param = {
-            id: this.goods.goods_id,
+            id: id,
             price: price
           }
+          console.log(price)
           this.$store.commit('changeOrderId', param)
+          this.$api.cartData.createOrder(orderlist).then(res => {
+            // console.log(res)
+          })
           this.$router.push('/orderpay')
         } else {
           this.$router.push('/login')

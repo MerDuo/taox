@@ -54,6 +54,7 @@
 <script>
 import likeGoods from '../../components/likeGoods.vue'
 import { Toast } from 'vant'
+import { mapMutations } from 'vuex'
 export default {
   components: {
     likeGoods
@@ -112,6 +113,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['changeGoodsInfo']),
     back () {
       this.$router.go(-1)
     },
@@ -125,11 +127,11 @@ export default {
       this.historyList.splice(0,this.historyList.length)
     },
     goHot (index) {
+      this.$store.commit('changeGoodsInfo', this.hotList[index])
       this.$router.push({
          name: 'detail',
           params: {
-          goodid: index,
-          goodsInfo: this.hotList[index]
+          goodid: index
         }
       })
     }

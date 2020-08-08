@@ -35,6 +35,8 @@ const OrderPay = () => import('../views/Cart/base/OrderPay.vue')
 const PaySuccess = () => import('../views/Cart/base/PaySuccess.vue')
 // 商品sku
 const GoodSku = () => import('../views/Detail/base/goodSku.vue')
+// 404
+const error = () => import('../components/404.vue')
 
 const routes = [
   {
@@ -128,6 +130,15 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: error
+  },
+  {
+    path: "*",
+    redirect: "/404"
   }
 ]
 

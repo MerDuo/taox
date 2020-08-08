@@ -29,8 +29,8 @@
       <div class="productInfo">
         <div class="title">{{goodsInfo.goods_name}}</div>
         <div class="subTitle">{{goodsInfo.goods_intro}}</div>
-        <span class="originPrice">￥{{goodsInfo.original_price}}</span>
-        <span class="price">￥{{goodsInfo.selling_price}}</span>
+        <span class="originPrice">￥{{goodsInfo.selling_price}}</span>
+        <span class="price">￥{{goodsInfo.original_price}}</span>
         <van-divider/>
         <div class="shippingInfo">
           运费：免运费
@@ -126,17 +126,18 @@ export default {
     },
     onClickStar () {
       // console.log('aaa')
-      if (this.isStar){
-        this.isStar = false
-        this.starColor = ''
-        this.starText = '收藏'
-        Toast('取消收藏成功')
-      } else {
-        this.isStar = true
-        this.starColor = '#FF5000'
-        this.starText = '已收藏'
-        Toast('收藏成功')
-      }
+      // if (this.isStar){
+      //   this.isStar = false
+      //   this.starColor = ''
+      //   this.starText = '收藏'
+      //   Toast('取消收藏成功')
+      // } else {
+      //   this.isStar = true
+      //   this.starColor = '#FF5000'
+      //   this.starText = '已收藏'
+      //   Toast('收藏成功')
+      // }
+      this.$toast('功能未研发')
     }
   }
 }
