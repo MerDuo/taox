@@ -15,6 +15,7 @@
 
 <script>
  import { Toast } from 'vant'
+ import { mapMutations } from 'vuex'
 export default {
     props: {
         title: {
@@ -24,12 +25,13 @@ export default {
         Data: Array
     },
     methods: {
+        ...mapMutations(['changeGoodsInfo']),
         itemClick (index) {
+            this.$store.commit('changeGoodsInfo', this.Data[index])
             this.$router.push({
                 name: 'detail',
                 params: {
                 goodid: index,
-                goodsInfo: this.Data[index],
                 isFlash: false
                 }
             })
