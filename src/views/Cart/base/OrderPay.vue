@@ -100,7 +100,7 @@
           if (this.value == "123456") {
             this.showPassWord = !this.showPassWord
             this.$toast.clear()
-            // 调用订单支付接口，现在缺少一个order_id
+            // 调用订单支付接口
             this.$api.cartData.payOrder(this.orderId).then(({
               data
             }) => {

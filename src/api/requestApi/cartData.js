@@ -52,6 +52,12 @@ const cartData = {
         goods_count: goodsNum.toString()
       }
     })
+  },
+  delOne(goodsId,goodsCount){
+    return axios.post('/api/v1/cart/set_item_count/', {
+        goods_id: goodsId,
+        goods_count: goodsCount
+    })
   }
 
 }

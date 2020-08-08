@@ -6,7 +6,7 @@
           <img src="../../../assets/headImg.png" />
         </div>
         <div class="user-name">
-          <div class="name">&nbsp;你好,user</div>
+          <div class="name">&nbsp;你好</div>
         </div>
       </van-col>
       <van-col class="qr-code">

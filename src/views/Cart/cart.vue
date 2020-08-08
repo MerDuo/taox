@@ -8,11 +8,11 @@
         <empty></empty>
       </div>
       <van-swipe-cell v-for="(cart,index) in cartList" :key="index">
-        <van-card v-bind:num="cart.goods_count" v-bind:price="cart.goods.selling_price" desc="描述信息" v-bind:title="cart.goods.goods_name"
+        <van-card v-bind:num="cart.goods_count" v-bind:price="cart.goods.selling_price" :desc="cart.goods.goods_detail_content" v-bind:title="cart.goods.goods_name"
           :thumb="cart.goods.goods_cover_image" lazy-load>
           <template #tags>
-            <van-tag plain type="danger">标签</van-tag>
-            <van-tag plain type="danger">标签</van-tag>
+            <van-tag plain type="danger">{{cart.goods.goods_intro}}</van-tag><br />
+            <van-tag plain type="danger">原价：{{cart.goods.original_price}}</van-tag>
           </template>
           <template #footer>
             <!-- <van-stepper v-model="goods_count" min="1" max="9999" integer/> -->
@@ -27,7 +27,7 @@
       <van-submit-bar :price="totleMoney" button-text="提交订单" @submit="onSubmit">
         <!-- <van-checkbox v-model="checked">全选</van-checkbox> -->
         <template #tip>
-          你的收货地址不支持同城送, <span id="changeAdress" @click="onClickEditAddress">修改地址</span>
+          点击这里修改送货地址, <span id="changeAdress" @click="onClickEditAddress">修改地址</span>
         </template>
       </van-submit-bar>
     </van-pull-refresh>
@@ -104,6 +104,11 @@
           this.totleMoney += parseInt(this.cartList[i].goods_count) * parseInt(this.cartList[i].goods.selling_price) *
             100
         }
+        this.$api.cartData.delOne(goodsId, 0).then(({
+          data
+        }) => {
+          console.log(data)
+        })
       },
       // 购物车商品数量-1
       reduce(goodsId) {
@@ -160,7 +165,8 @@
       }) => {
         if (data.code == 202) {
           this.cartList = data.data.cart_items
-          console.log(data.data.cart_items[0].goods.goods_cover_image)
+          console.log(this.cartList)
+          // console.log(data.data.cart_items[0].goods.goods_cover_image)
           if (this.cartList.length == 0) {
             this.cartNull = true
           }

@@ -44,7 +44,7 @@
           <van-share-sheet v-model="showShare" title="分享给好友" :options="options" @select="onSelect" />
         </van-col>
         <van-col>
-          <van-button size="mini" round color="#FF5000">去购买</van-button>
+          <van-button size="mini" round color="#FF5000" @click="jump">去购买</van-button>
         </van-col>
       </van-row>
     </div>
@@ -83,6 +83,9 @@
       onSelect(option) {
         this.$toast(option.name)
         this.showShare = false
+      },
+      jump(){
+        this.$router.push('/')
       }
     }
   }

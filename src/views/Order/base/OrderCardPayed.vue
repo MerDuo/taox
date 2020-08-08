@@ -1,6 +1,6 @@
 <template>
   <div class="order-card">
-    <van-panel title="订单号：T20191203" status="已完成" class="m-b-10 b-r-10" v-for="(item,index) in 1" :key="index">
+    <van-panel title="订单号：T20191203" status="待发货" class="m-b-10 b-r-10" v-for="(item,index) in 1" :key="index">
       <div class="content" @click="jumoToDetial">
         <div v-for="(item,index) in list" :key="index">
           <div>

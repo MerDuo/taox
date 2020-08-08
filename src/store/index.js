@@ -14,7 +14,11 @@ export default new Vuex.Store({
     // total_price
     totalPrice: 0,
     // 详细的商品信息
-    goodsInfo: {}
+    goodsInfo: {},
+    // address_id
+    addressId: 0,
+    // address change list
+    addressChangeList: []
   },
   mutations: {
     // MenuBar的active变化时触发
@@ -33,6 +37,10 @@ export default new Vuex.Store({
     // 改变商品详情
     changeGoodsInfo(state, param) {
       state.goodsInfo = param
+    },
+    changeAddressId(state, param){
+      state.addressId = param.id
+      state.addressChangeList = param.list
     }
   },
   actions: {
