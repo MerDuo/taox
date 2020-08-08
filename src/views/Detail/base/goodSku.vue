@@ -48,19 +48,36 @@
     methods: {
       // 立即购买
       onBuyClicked() {
-        this.$router.push('/orderpay')
+        if (localStorage.getItem('Authorization') !== null) {
+          const goodsNum = this.$refs.getSku.getSkuData().selectedNum
+          const price = parseFloat(this.goods.selling_price) * goodsNum
+          const param = {
+            id: this.goods.goods_id,
+            price: price
+          }
+          this.$store.commit('changeOrderId', param)
+          this.$router.push('/orderpay')
+        } else {
+          this.$router.push('/login')
+        }
       },
       // 添加购物车
       onAddCartClicked() {
-        var goodsNum = this.$refs.getSku.getSkuData().selectedNum
-        // console.log(goodsNum)
-        this.$api.cartData.addGoods(this.goods.goods_id, goodsNum).then(res => {
-          // console.log(res)
-          this.$toast('加入购物车成功')
-          this.showSku = false
-        }).catch(e => {
-          console.log(e)
-        })
+        if (localStorage.getItem('Authorization') !== null) {
+          // console.log('login')
+          var goodsNum = this.$refs.getSku.getSkuData().selectedNum
+          // console.log(goodsNum)
+          this.$api.cartData.addGoods(this.goods.goods_id, goodsNum).then(res => {
+            // console.log(res)
+            this.$toast('加入购物车成功')
+            this.showSku = false
+          }).catch(e => {
+            console.log(e)
+          })
+        } else {
+          // console.log('unlogin')
+          this.$router.push('/login')
+        }
       }
 
     }

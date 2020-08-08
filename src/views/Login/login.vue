@@ -89,7 +89,7 @@ export default {
     ...mapMutations(['changeLogin']),
     // 返回上一页
     handleBack() {
-      this.$router.go(-1)
+      this.$router.push('/home')
     },
     onLogin() {
       localStorage.removeItem('Authorization')
