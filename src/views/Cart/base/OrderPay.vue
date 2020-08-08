@@ -4,10 +4,10 @@
     <van-nav-bar title="支付订单" left-arrow @click-left="onBack" />
     <!-- 支付金额 -->
     <van-row type="flex" justify="center">
-        <van-col>
-          <div class="price">￥2339</div>
-          <div class="title">支付金额</div>
-        </van-col>
+      <van-col>
+        <div class="price">￥{{totalPrice}}</div>
+        <div class="title">支付金额</div>
+      </van-col>
     </van-row>
     <!-- 选择支付方式 -->
     <div class="pay-way">
@@ -38,117 +38,125 @@
       </van-radio-group>
       <!-- 确认支付按钮 -->
       <div class="pay-btn">
-          <van-button type="primary" color="#FF5000" block @click="onPay">确认支付</van-button>
+        <van-button type="primary" color="#FF5000" block @click="onPay">确认支付</van-button>
       </div>
 
     </div>
     <!-- 弹出支付输入密码框 -->
     <van-popup v-model="showPassWord" position="bottom" :style="{ height: '50%' }">
       <!-- 密码输入框 -->
-      <van-password-input
-        :value="value"
-        info="默认支付密码:123456"
-        :focused="showKeyboard"
-        @focus="showKeyboard = true"
-      />
+      <van-password-input :value="value" info="默认支付密码:123456" :focused="showKeyboard" @focus="showKeyboard = true" />
       <!-- 数字键盘 -->
-      <van-number-keyboard
-        :show="showKeyboard"
-        theme="custom"
-        close-button-text="确定"
-        transition
-        @input="onInput"
-        @delete="onDelete"
-        @blur="showKeyboard = true"
-        @close="onConfirm"
-        safe-area-inset-bottom
-      />
+      <van-number-keyboard :show="showKeyboard" theme="custom" close-button-text="确定" transition @input="onInput"
+        @delete="onDelete" @blur="showKeyboard = true" @close="onConfirm" safe-area-inset-bottom />
     </van-popup>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      radio: "1", // 默认选择的支付方式
-      showPassWord: false, // 密码输入框
-      value: "", // 密码值
-      showKeyboard: true // 输入键盘
-    }
-  },
-  methods: {
-    // 路由返回
-    onBack() {
-      this.$router.back()
+  import {
+    mapState
+  } from 'vuex'
+  export default {
+    data() {
+      return {
+        radio: "1", // 默认选择的支付方式
+        showPassWord: false, // 密码输入框
+        value: "", // 密码值
+        showKeyboard: true ,// 输入键盘
+        price: 0
+      }
     },
-    // 确认支付
-    onPay() {
-      this.showPassWord = !this.showPassWord
-      this.value = "" // 初始化密码输入框
+    computed: {
+      ...mapState(['orderId', 'totalPrice'])
     },
-    // 密码输入框
-    onInput(key) {
-      this.value = (this.value + key).slice(0, 6)
+    methods: {
+      // 路由返回
+      onBack() {
+        this.$router.back()
+      },
+      // 确认支付
+      onPay() {
+        this.showPassWord = !this.showPassWord
+        this.value = "" // 初始化密码输入框
+      },
+      // 密码输入框
+      onInput(key) {
+        this.value = (this.value + key).slice(0, 6)
+      },
+      // 清除密码输错
+      onDelete() {
+        this.value = this.value.slice(0, this.value.length - 1)
+      },
+      // 输入完成
+      onConfirm() {
+        this.$toast.loading({
+          message: "加载中...",
+          forbidClick: true,
+          loadingType: "spinner"
+        })
+        setTimeout(() => {
+          //   密码输入正确要做的事情
+          if (this.value == "123456") {
+            this.showPassWord = !this.showPassWord
+            this.$toast.clear()
+            // 调用订单支付接口，现在缺少一个order_id
+            this.$api.cartData.payOrder(this.orderId).then(({
+              data
+            }) => {
+              console.log(data)
+              // var list = []
+              // list[]
+              // this.cartList = data
+            })
+            this.$router.push("/paysuccess")
+            //   this.$toast.success('支付成功');
+          } else {
+            //   密码输入错误要做的事情
+            this.showPassWord = !this.showPassWord
+            this.$toast.clear()
+            this.$toast.fail("密码输入错误")
+          }
+        }, 1000)
+      }
     },
-    // 清除密码输错
-    onDelete() {
-      this.value = this.value.slice(0, this.value.length - 1)
-    },
-    // 输入完成
-    onConfirm() {
-      this.$toast.loading({
-        message: "加载中...",
-        forbidClick: true,
-        loadingType: "spinner"
-      })
-      setTimeout(() => {
-        //   密码输入正确要做的事情
-        if (this.value == "123456") {
-          this.showPassWord = !this.showPassWord
-          this.$toast.clear()
-          // 调用订单支付接口，现在缺少一个order_id
-          this.$api.cartData.payOrder(1)
-          this.$router.push("/paysuccess")
-          //   this.$toast.success('支付成功');
-        } else {
-          //   密码输入错误要做的事情
-          this.showPassWord = !this.showPassWord
-          this.$toast.clear()
-          this.$toast.fail("密码输入错误")
-        }
-      }, 1000)
+    created(){
+      this.price = this.totalPrice
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-.order-pay{
+  .order-pay {
     background-color: #fff;
     position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    .van-icon-arrow-left{
+
+    .van-icon-arrow-left {
       color: #000;
     }
-    .price{
+
+    .price {
       color: #FF5000;
       font-size: 24px;
       padding-top: 20px;
     }
-    .title{
+
+    .title {
       margin-top: 5px;
       padding-left: 8px;
       text-align: center;
     }
-    .pay-way{
-        padding: 20px;
-        .pay-btn{
-            padding: 10px;
-        }
+
+    .pay-way {
+      padding: 20px;
+
+      .pay-btn {
+        padding: 10px;
+      }
     }
-}
+  }
 </style>

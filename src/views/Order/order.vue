@@ -9,20 +9,20 @@
       :swipe-threshold="6">
       <!-- 全部订单 -->
       <van-tab title="全部">
-        <order-card></order-card>
+        <order-card-all></order-card-all>
       </van-tab>
       <!-- 待付款订单 -->
       <van-tab title="待付款">
-        <order-card></order-card>
+        <order-card-no-pay></order-card-no-pay>
       </van-tab>
       <van-tab title="待发货">
-        <order-card></order-card>
+        <order-card-payed></order-card-payed>
       </van-tab>
       <van-tab title="待收货">
-        <order-card></order-card>
+        <order-card-sending></order-card-sending>
       </van-tab>
       <van-tab title="待评价">
-        <order-card></order-card>
+        <order-card-wait></order-card-wait>
       </van-tab>
       <van-tab title="售后">
         <empty></empty>
@@ -33,11 +33,20 @@
 
 <script>
   import Empty from "../../components/empty.vue"
-  import OrderCard from "./base/OrderCard"
+  import OrderCardWait from "./base/OrderCardWait"
+  import OrderCardNoPay from "./base/OrderCardNoPay"
+  import OrderCardPayed from "./base/OrderCardPayed"
+  import OrderCardSending from "./base/OrderCardSending"
+  import OrderCardAll from "./base/OrderCardAll.vue"
+
   export default {
     components: {
-      OrderCard,
-      Empty
+      OrderCardWait,
+      Empty,
+      OrderCardNoPay,
+      OrderCardPayed,
+      OrderCardSending,
+      OrderCardAll
     },
     data() {
       return {
@@ -59,6 +68,7 @@
 
 <style lang="scss" scoped>
   .my-order {
+
     // 顶部导航左图标颜色
     .van-icon-arrow-left {
       color: #000;

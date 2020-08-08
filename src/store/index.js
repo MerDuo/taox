@@ -8,7 +8,11 @@ export default new Vuex.Store({
     // MenuBar的active
     active2: 0,
     // token
-    Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : ''
+    Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
+    // order_id
+    orderId: 0,
+    // total_price
+    totalPrice: 0
   },
   mutations: {
     // MenuBar的active变化时触发
@@ -19,6 +23,10 @@ export default new Vuex.Store({
       // console.log(user.Authorization)
       state.Authorization = user.Authorization
       localStorage.setItem('Authorization', user.Authorization)
+    },
+    changeOrderId(state, param){
+      state.orderId = param.id
+      state.totalPrice = param.price
     }
   },
   actions: {

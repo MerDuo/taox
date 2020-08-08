@@ -4,23 +4,15 @@ const cartData = {
   // 商品详细页数据请求
   getData() {
     // return axios.get(`http://api01.6bqb.com/pdd/detail?apikey=C3B20706341F6390F227115655C32AFE&itemid=${goodsId}`)
-    return axios.get('api/v1/cart/').then(({
-      data
-    }) => {
-      console.log(data)
-      // var list = []
-      // list[]
-      // this.cartList = data
-    })
+    return axios.get('api/v1/cart/')
   },
   changeCount(goodsId, count) {
-    // 返回成功/失败
     if (count == 1) {
-      axios.post(`api/v1/cart/inc_dec_item/1`, {
+      return axios.post(`api/v1/cart/inc_dec_item/1/`, {
         goods_id: goodsId
       })
     } else {
-      axios.post(`api/v1/cart/inc_dec_item/-1`, {
+      return axios.post(`api/v1/cart/inc_dec_item/2/`, {
         goods_id: goodsId
       })
     }
@@ -29,23 +21,21 @@ const cartData = {
     var data = []
     for (var i = 0; i < cartList.length; i++) {
       data.push({
-        goods_id: cartList[i].goods_id,
+        goods_id: cartList[i].goods.goods_id,
         goods_count: cartList[i].goods_count
       })
     }
-    return axios.post('/api/v1/cart', {
-      goods: data
-    }).then(({
+    console.log(data)
+    return axios.post('/api/v1/order/',
+      // JSON.stringify(data)
       data
-    }) => {
-      console.log(data)
-      // var list = []
-      // list[]
-      // this.cartList = data
-    })
+    )
   },
-  payOrder(orderId){
-    return axios.get(`/api/v1/pay_order?order_id=${orderId}`).then(({
+  payOrder(orderId) {
+    return axios.get(`/api/v1/pay_order?order_id=${orderId}`)
+  },
+  addCart() {
+    return axios.get(`/api/v1/cart?goods_id=10005&goods_count=1`).then(({
       data
     }) => {
       console.log(data)

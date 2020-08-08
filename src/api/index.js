@@ -15,11 +15,14 @@ import address from "./requestApi/address.js"
 
 // 商品分类请求接口
 import categoryData from './requestApi/categoryData'
+// 订单
+import order from './requestApi/order.js'
 
 export default {
   homeData,
   detailData,
   cartData,
   address,
-  categoryData
+  categoryData,
+  order
 }
