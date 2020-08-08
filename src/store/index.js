@@ -12,7 +12,9 @@ export default new Vuex.Store({
     // order_id
     orderId: 0,
     // total_price
-    totalPrice: 0
+    totalPrice: 0,
+    // 详细的商品信息
+    goodsInfo: {}
   },
   mutations: {
     // MenuBar的active变化时触发
@@ -27,6 +29,10 @@ export default new Vuex.Store({
     changeOrderId(state, param){
       state.orderId = param.id
       state.totalPrice = param.price
+    },
+    // 改变商品详情
+    changeGoodsInfo(state, param) {
+      state.goodsInfo = param
     }
   },
   actions: {

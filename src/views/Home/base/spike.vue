@@ -37,6 +37,7 @@
 </template>
 <script>
 import { Toast } from 'vant'
+import { mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -50,14 +51,15 @@ export default {
     })
   },
   methods: {
+    ...mapMutations(['changeGoodsInfo']),
     goDetail (index) {
       // console.log(index)
       // console.log(this.spikeGoods[index])
+      this.$store.commit('changeGoodsInfo', this.spikeGoods[index])
        this.$router.push({
          name: 'detail',
           params: {
           goodid: index,
-          goodsInfo: this.spikeGoods[index],
           isFlash: true
         }
        })

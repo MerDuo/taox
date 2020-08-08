@@ -41,6 +41,7 @@
 <script>
 import Vue from 'vue'
 import { List, Divider } from 'vant'
+import { mapMutations } from 'vuex'
 
 Vue.use(List).use(Divider)
 export default {
@@ -61,6 +62,7 @@ export default {
   },
   methods: {
     // 商品上拉刷新
+    ...mapMutations(['changeGoodsInfo']),
     onLoad() {
         this.loading = false
         if (this.goodsData.length > 9 * (this.nextPage - 1)){
@@ -78,11 +80,11 @@ export default {
     goDetail(index) {
       // console.log(index)
       // console.log(this.goodsData[index])
+      this.$store.commit('changeGoodsInfo', this.goodsData[index])
       this.$router.push({
         name: 'detail',
         params: {
           goodid: index,
-          goodsInfo: this.goodsData[index],
           isFlash: false
         }
       })

@@ -80,6 +80,7 @@
 import { Toast, NavBar } from "vant"
 import Vue from "vue"
 import goodSku from './base/goodSku'
+import { mapState } from 'vuex'
 
 Vue.use(NavBar)
 
@@ -90,7 +91,6 @@ export default {
       time: 30 * 60 * 1000 * 100,
       // 是否是限时抢购
       isFlash: false,
-      goodsInfo: {},
       starText: '收藏',
       starColor: '',
       isStar: false,
@@ -101,20 +101,10 @@ export default {
     goodSku
   },
   computed: {
-    // ...mapState(["shopCart"])
-    // 购物车商品数量
-    // goodsNum () {
-    //   let num = 0
-    //   Object.values(this.shopCart).forEach((goods, index) => {
-    //     num += goods.num
-    //   })
-    //   if (num > 0) {
-    //     return num
-    //   }
-    // }
+     ...mapState(["goodsInfo"])
   },
   created () {
-    this.goodsInfo = this.$route.params.goodsInfo
+    // console.log(this.goodsInfo)
     this.isFlash = this.$route.params.isFlash
     // console.log(this.goodsInfo)
   },
