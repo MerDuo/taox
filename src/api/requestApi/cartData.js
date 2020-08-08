@@ -43,7 +43,17 @@ const cartData = {
       // list[]
       // this.cartList = data
     })
+  },
+  // sku增加购物车
+  addGoods(goodsId, goodsNum) {
+    return axios.get('/api/v1/cart', {
+      params: {
+        goods_id: goodsId.toString(),
+        goods_count: goodsNum.toString()
+      }
+    })
   }
+
 }
 
 export default cartData
