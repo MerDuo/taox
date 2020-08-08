@@ -28,7 +28,7 @@
     },
     methods: {
     toDetail (index) {
-      Toast('去索引为' + index + '的详情页')
+      Toast('这是第' + (index + 1) + '张图')
     }
   }
   }
