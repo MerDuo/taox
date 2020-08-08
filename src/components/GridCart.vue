@@ -3,10 +3,10 @@
     <van-row class="title">
       <van-col>{{title}}</van-col>
     </van-row>
-    <van-grid :column-num="3" class="border-r-5"  clickable>
-      <van-grid-item v-for="(item,index) in Data" :key="index" :text="item.title" @click="itemClick(item.title)">
+    <van-grid :column-num="2" class="border-r-5"  clickable :gutter="4">
+      <van-grid-item v-for="(item,index) in Data" :key="index" :text="item.goods_name" @click="itemClick(index)">
           <div slot="icon">
-              <img class="icon-img" :src="item.iconUrl" alt="item.title">
+              <img class="icon-img" :src="'http://119.3.208.63:8000' + item.goods_cover_image" alt="item.title">
           </div>
       </van-grid-item>
     </van-grid>
@@ -21,16 +21,22 @@ export default {
             type: String,
             default: "标题"
         },
-        column: {
-            type: Number,
-            default: 3
-        },
         Data: Array
     },
     methods: {
-        itemClick (title) {
-            Toast(title)
+        itemClick (index) {
+            this.$router.push({
+                name: 'detail',
+                params: {
+                goodid: index,
+                goodsInfo: this.Data[index],
+                isFlash: false
+                }
+            })
         }
+    },
+    created () {
+        // console.log(this.Data)
     }
 }
 </script>
@@ -47,7 +53,14 @@ export default {
         .icon-img{
             width: 40px;
             height: 40px;
+            margin-top: 5px;
         }
+    }
+    .van-grid-item__content {
+        padding: 12px 5px;
+    }
+    .van-grid-item__text {
+        font-size: 10px;
     }
 }
 </style>

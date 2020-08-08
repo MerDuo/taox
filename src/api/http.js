@@ -78,6 +78,7 @@ axios.interceptors.request.use(
     // 添加TOKEN验证，可以从本地存储中获值，也可以从vuex中取值，主要是看自己怎么存储值的。
     // JWT实现TOKEN校验
     const token = localStorage.getItem('Authorization')
+    console.log(token)
     token && (config.headers.Authorization = token)
     return config
   },

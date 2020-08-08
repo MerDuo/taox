@@ -55,7 +55,8 @@ import {
   Radio,
   PasswordInput,
   NumberKeyboard,
-  Empty
+  Empty,
+  Sku
 } from 'vant'
 
 Vue.use(Toast)
@@ -108,6 +109,7 @@ Vue.use(Toast)
   .use(PasswordInput)
   .use(NumberKeyboard)
   .use(Empty)
+  .use(Sku)
 Vue.config.productionTip = false
 Vue.prototype.$api = api
 // axios.defaults.baseURL = "http://119.3.208.63:8000"

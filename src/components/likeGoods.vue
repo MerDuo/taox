@@ -28,7 +28,7 @@
               </div>
               <!-- 下单图标 -->
               <div class="buy-icon">
-                <van-icon name="cart-o" color="#fff" size=".5rem" />
+                <van-icon name="cart-o" color="#fff" size=".5rem"/>
               </div>
             </div>
           </div>

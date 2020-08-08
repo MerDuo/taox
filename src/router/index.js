@@ -33,6 +33,8 @@ const Logistics = () => import('../views/Order/base/Logistics.vue')
 const OrderPay = () => import('../views/Cart/base/OrderPay.vue')
 // 支付成功
 const PaySuccess = () => import('../views/Cart/base/PaySuccess.vue')
+// 商品sku
+const GoodSku = () => import('../views/Detail/base/goodSku.vue')
 
 const routes = [
   {
@@ -116,6 +118,13 @@ const routes = [
   {
     path: '/paysuccess',
     component: PaySuccess,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/goodsku',
+    component: GoodSku,
     meta: {
       requireAuth: true
     }

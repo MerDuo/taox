@@ -13,9 +13,13 @@ import cartData from "./requestApi/cartData"
 // 地址管理
 import address from "./requestApi/address.js"
 
+// 商品分类请求接口
+import categoryData from './requestApi/categoryData'
+
 export default {
   homeData,
   detailData,
   cartData,
-  address
+  address,
+  categoryData
 }
